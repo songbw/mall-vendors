@@ -1,0 +1,5178 @@
+= 用户管理接口文档
+
+
+[[_overview]]
+== Overview
+请勿随意测试删除类接口
+
+
+=== Version information
+[%hardbreaks]
+__Version__ : V1.0.0
+
+
+=== Contact information
+[%hardbreaks]
+__Contact__ : Clark
+__Contact Email__ : 1554711952@qq.com
+
+
+=== License information
+[%hardbreaks]
+__License__ : Apache
+__License URL__ : http://www.apache.org/licenses/
+__Terms of service__ : null
+
+
+=== URI scheme
+[%hardbreaks]
+__Host__ : localhost:8081
+__BasePath__ : /seller
+
+
+=== Tags
+
+* LogAPI : 日志相关
+* LoginAPI : 用户登录相关
+* PermissionAPI : 用户权限相关
+* RoleAPI : 用户角色相关
+* userAPI : 用户管理相关
+
+
+
+
+[[_paths]]
+== Paths
+
+[[_getverificationcodeusingget]]
+=== 获取验证码
+....
+GET /seller/getCode
+....
+
+
+==== Description
+验证码在返回JSON中的msg部分
+
+
+==== Parameters
+
+[options="header", cols=".^2,.^3,.^9,.^4"]
+|===
+|Type|Name|Description|Schema
+|**Query**|**username** +
+__required__|用户名|string
+|===
+
+
+==== Responses
+
+[options="header", cols=".^2,.^14,.^4"]
+|===
+|HTTP Code|Description|Schema
+|**200**|OK|<<_resultmsg,ResultMsg>>
+|**401**|Unauthorized|No Content
+|**403**|Forbidden|No Content
+|**404**|Not Found|No Content
+|===
+
+
+==== Consumes
+
+* `application/json`
+
+
+==== Produces
+
+* `application/json;charset=UTF-8`
+
+
+==== Tags
+
+* LoginAPI
+
+
+==== Example HTTP request
+
+===== Request path
+----
+/seller/getCode
+----
+
+
+===== Request query
+[source,json]
+----
+{
+  "username" : "string"
+}
+----
+
+
+==== Example HTTP response
+
+===== Response 200
+[source,json]
+----
+{
+  "code" : 0,
+  "msg" : "string"
+}
+----
+
+
+[[_deletebyidusingpost_2]]
+=== 删除用户
+....
+POST /seller/log/deleteById
+....
+
+
+==== Description
+需要管理员权限
+
+
+==== Parameters
+
+[options="header", cols=".^2,.^3,.^9,.^4"]
+|===
+|Type|Name|Description|Schema
+|**Header**|**Token** +
+__required__|登录成功时从服务获得的Token|string
+|**Body**|**data** +
+__required__|data:id必须填写,其他的空缺|<<_syslogbean,SysLogBean>>
+|===
+
+
+==== Responses
+
+[options="header", cols=".^2,.^14,.^4"]
+|===
+|HTTP Code|Description|Schema
+|**200**|OK|<<_resultmsg,ResultMsg>>
+|**201**|Created|No Content
+|**401**|Unauthorized|No Content
+|**403**|Forbidden|No Content
+|**404**|Not Found|No Content
+|===
+
+
+==== Consumes
+
+* `application/json`
+
+
+==== Produces
+
+* `application/json;charset=UTF-8`
+
+
+==== Tags
+
+* LogAPI
+
+
+==== Example HTTP request
+
+===== Request path
+----
+/seller/log/deleteById
+----
+
+
+===== Request header
+[source,json]
+----
+"string"
+----
+
+
+===== Request body
+[source,json]
+----
+{
+  "createTimeEnd" : "string",
+  "createTimeStart" : "string",
+  "id" : 0,
+  "idList" : [ 0 ],
+  "ip" : "string",
+  "method" : "string",
+  "param" : "string",
+  "result" : "string",
+  "timeUsed" : "string",
+  "url" : "string",
+  "user" : "string",
+  "userAgent" : "string"
+}
+----
+
+
+==== Example HTTP response
+
+===== Response 200
+[source,json]
+----
+{
+  "code" : 0,
+  "msg" : "string"
+}
+----
+
+
+[[_deletebyidlistusingpost]]
+=== 删除用户组
+....
+POST /seller/log/deleteByIdList
+....
+
+
+==== Description
+需要管理员权限
+
+
+==== Parameters
+
+[options="header", cols=".^2,.^3,.^9,.^4"]
+|===
+|Type|Name|Description|Schema
+|**Header**|**Token** +
+__required__|登录成功时从服务获得的Token|string
+|**Body**|**data** +
+__required__|data:idList必须填写,其他空缺|<<_syslogbean,SysLogBean>>
+|===
+
+
+==== Responses
+
+[options="header", cols=".^2,.^14,.^4"]
+|===
+|HTTP Code|Description|Schema
+|**200**|OK|<<_resultmsg,ResultMsg>>
+|**201**|Created|No Content
+|**401**|Unauthorized|No Content
+|**403**|Forbidden|No Content
+|**404**|Not Found|No Content
+|===
+
+
+==== Consumes
+
+* `application/json`
+
+
+==== Produces
+
+* `application/json;charset=UTF-8`
+
+
+==== Tags
+
+* LogAPI
+
+
+==== Example HTTP request
+
+===== Request path
+----
+/seller/log/deleteByIdList
+----
+
+
+===== Request header
+[source,json]
+----
+"string"
+----
+
+
+===== Request body
+[source,json]
+----
+{
+  "createTimeEnd" : "string",
+  "createTimeStart" : "string",
+  "id" : 0,
+  "idList" : [ 0 ],
+  "ip" : "string",
+  "method" : "string",
+  "param" : "string",
+  "result" : "string",
+  "timeUsed" : "string",
+  "url" : "string",
+  "user" : "string",
+  "userAgent" : "string"
+}
+----
+
+
+==== Example HTTP response
+
+===== Response 200
+[source,json]
+----
+{
+  "code" : 0,
+  "msg" : "string"
+}
+----
+
+
+[[_searchlogusingpost]]
+=== 组织列表
+....
+POST /seller/log/search
+....
+
+
+==== Description
+Header中必须包含Token
+
+
+==== Parameters
+
+[options="header", cols=".^2,.^3,.^9,.^4,.^2"]
+|===
+|Type|Name|Description|Schema|Default
+|**Header**|**Authorization** +
+__required__|data:pageIndex, pageSize|string|`"UTF-8"`
+|**Header**|**Token** +
+__required__|登录成功时从服务获得的Token|string|
+|**Body**|**postData** +
+__required__|postData|<<_e6856ecfa5abc54d7bee7e3ce2232e53,PageRequestBean«SysLogBean»>>|
+|===
+
+
+==== Responses
+
+[options="header", cols=".^2,.^14,.^4"]
+|===
+|HTTP Code|Description|Schema
+|**200**|OK|<<_fd1070d690a733ef6ff41716ac70fddd,ResultObject«PageInfo«SysLogBean»»>>
+|**201**|Created|No Content
+|**401**|Unauthorized|No Content
+|**403**|Forbidden|No Content
+|**404**|Not Found|No Content
+|===
+
+
+==== Consumes
+
+* `application/json`
+
+
+==== Produces
+
+* `application/json;charset=UTF-8`
+
+
+==== Tags
+
+* LogAPI
+
+
+==== Example HTTP request
+
+===== Request path
+----
+/seller/log/search
+----
+
+
+===== Request header
+[source,json]
+----
+"string"
+----
+
+
+===== Request body
+[source,json]
+----
+{
+  "data" : {
+    "createTimeEnd" : "string",
+    "createTimeStart" : "string",
+    "id" : 0,
+    "idList" : [ 0 ],
+    "ip" : "string",
+    "method" : "string",
+    "param" : "string",
+    "result" : "string",
+    "timeUsed" : "string",
+    "url" : "string",
+    "user" : "string",
+    "userAgent" : "string"
+  },
+  "pageIndex" : 0,
+  "pageSize" : 0
+}
+----
+
+
+==== Example HTTP response
+
+===== Response 200
+[source,json]
+----
+{
+  "code" : 0,
+  "data" : {
+    "pageSize" : 0,
+    "rows" : [ {
+      "createTimeEnd" : "string",
+      "createTimeStart" : "string",
+      "id" : 0,
+      "idList" : [ 0 ],
+      "ip" : "string",
+      "method" : "string",
+      "param" : "string",
+      "result" : "string",
+      "timeUsed" : "string",
+      "url" : "string",
+      "user" : "string",
+      "userAgent" : "string"
+    } ],
+    "total" : 0
+  },
+  "msg" : "string"
+}
+----
+
+
+[[_shrinkallusingpost]]
+=== 数据清理
+....
+POST /seller/log/shrink
+....
+
+
+==== Description
+需要管理员权限
+
+
+==== Parameters
+
+[options="header", cols=".^2,.^3,.^9,.^4,.^2"]
+|===
+|Type|Name|Description|Schema|Default
+|**Header**|**Authorization** +
+__required__|Authorization|string|`"UTF-8"`
+|**Header**|**Token** +
+__required__|登录成功时从服务获得的Token|string|
+|===
+
+
+==== Responses
+
+[options="header", cols=".^2,.^14,.^4"]
+|===
+|HTTP Code|Description|Schema
+|**200**|OK|<<_resultmsg,ResultMsg>>
+|**201**|Created|No Content
+|**401**|Unauthorized|No Content
+|**403**|Forbidden|No Content
+|**404**|Not Found|No Content
+|===
+
+
+==== Consumes
+
+* `application/json`
+
+
+==== Produces
+
+* `application/json;charset=UTF-8`
+
+
+==== Tags
+
+* LogAPI
+
+
+==== Example HTTP request
+
+===== Request path
+----
+/seller/log/shrink
+----
+
+
+===== Request header
+[source,json]
+----
+"string"
+----
+
+
+==== Example HTTP response
+
+===== Response 200
+[source,json]
+----
+{
+  "code" : 0,
+  "msg" : "string"
+}
+----
+
+
+[[_loginusingpost]]
+=== 登录
+....
+POST /seller/login
+....
+
+
+==== Description
+返回的Header中Token需要保存，用于其他操作的Authorization
+
+
+==== Parameters
+
+[options="header", cols=".^2,.^3,.^9,.^4"]
+|===
+|Type|Name|Description|Schema
+|**Body**|**loginBean** +
+__required__|用户名,密码,验证码|<<_loginbean,LoginBean>>
+|===
+
+
+==== Responses
+
+[options="header", cols=".^2,.^14,.^4"]
+|===
+|HTTP Code|Description|Schema
+|**200**|OK|<<_resultmsg,ResultMsg>>
+|**201**|Created|No Content
+|**401**|Unauthorized|No Content
+|**403**|Forbidden|No Content
+|**404**|Not Found|No Content
+|===
+
+
+==== Consumes
+
+* `application/json`
+
+
+==== Produces
+
+* `application/json;charset=UTF-8`
+
+
+==== Tags
+
+* LoginAPI
+
+
+==== Example HTTP request
+
+===== Request path
+----
+/seller/login
+----
+
+
+===== Request body
+[source,json]
+----
+{
+  "code" : "string",
+  "oldPassword" : "string",
+  "password" : "string",
+  "username" : "string"
+}
+----
+
+
+==== Example HTTP response
+
+===== Response 200
+[source,json]
+----
+{
+  "code" : 0,
+  "msg" : "string"
+}
+----
+
+
+[[_forgetpasswordusingpost]]
+=== 忘记密码重设
+....
+POST /seller/password/forget
+....
+
+
+==== Description
+Header中必须包含Token
+
+
+==== Parameters
+
+[options="header", cols=".^2,.^3,.^9,.^4"]
+|===
+|Type|Name|Description|Schema
+|**Header**|**Token** +
+__required__|登录成功时从服务获得的Token|string
+|**Body**|**loginBean** +
+__required__|data:用户名,新密码,验证码|<<_loginbean,LoginBean>>
+|===
+
+
+==== Responses
+
+[options="header", cols=".^2,.^14,.^4"]
+|===
+|HTTP Code|Description|Schema
+|**200**|OK|<<_resultmsg,ResultMsg>>
+|**201**|Created|No Content
+|**401**|Unauthorized|No Content
+|**403**|Forbidden|No Content
+|**404**|Not Found|No Content
+|===
+
+
+==== Consumes
+
+* `application/json`
+
+
+==== Produces
+
+* `application/json;charset=UTF-8`
+
+
+==== Tags
+
+* LoginAPI
+
+
+==== Example HTTP request
+
+===== Request path
+----
+/seller/password/forget
+----
+
+
+===== Request header
+[source,json]
+----
+"string"
+----
+
+
+===== Request body
+[source,json]
+----
+{
+  "code" : "string",
+  "oldPassword" : "string",
+  "password" : "string",
+  "username" : "string"
+}
+----
+
+
+==== Example HTTP response
+
+===== Response 200
+[source,json]
+----
+{
+  "code" : 0,
+  "msg" : "string"
+}
+----
+
+
+[[_updatepasswordusingpost]]
+=== 修改密码
+....
+POST /seller/password/update
+....
+
+
+==== Description
+Header中必须包含Token
+
+
+==== Parameters
+
+[options="header", cols=".^2,.^3,.^9,.^4"]
+|===
+|Type|Name|Description|Schema
+|**Header**|**Token** +
+__required__|登录成功时从服务获得的Token|string
+|**Body**|**loginBean** +
+__required__|data:用户名,旧密码,新密码|<<_loginbean,LoginBean>>
+|===
+
+
+==== Responses
+
+[options="header", cols=".^2,.^14,.^4"]
+|===
+|HTTP Code|Description|Schema
+|**200**|OK|<<_resultmsg,ResultMsg>>
+|**201**|Created|No Content
+|**401**|Unauthorized|No Content
+|**403**|Forbidden|No Content
+|**404**|Not Found|No Content
+|===
+
+
+==== Consumes
+
+* `application/json`
+
+
+==== Produces
+
+* `application/json;charset=UTF-8`
+
+
+==== Tags
+
+* LoginAPI
+
+
+==== Example HTTP request
+
+===== Request path
+----
+/seller/password/update
+----
+
+
+===== Request header
+[source,json]
+----
+"string"
+----
+
+
+===== Request body
+[source,json]
+----
+{
+  "code" : "string",
+  "oldPassword" : "string",
+  "password" : "string",
+  "username" : "string"
+}
+----
+
+
+==== Example HTTP response
+
+===== Response 200
+[source,json]
+----
+{
+  "code" : 0,
+  "msg" : "string"
+}
+----
+
+
+[[_deletebyidusingpost]]
+=== 删除权限
+....
+POST /seller/permission/delete
+....
+
+
+==== Description
+Header中必须包含Token
+
+
+==== Parameters
+
+[options="header", cols=".^2,.^3,.^9,.^4"]
+|===
+|Type|Name|Description|Schema
+|**Header**|**Token** +
+__required__|登录成功时从服务获得的Token|string
+|**Body**|**data** +
+__required__|data: ID必须填写,其他的空缺|<<_syspermissionbean,SysPermissionBean>>
+|===
+
+
+==== Responses
+
+[options="header", cols=".^2,.^14,.^4"]
+|===
+|HTTP Code|Description|Schema
+|**200**|OK|<<_resultmsg,ResultMsg>>
+|**201**|Created|No Content
+|**401**|Unauthorized|No Content
+|**403**|Forbidden|No Content
+|**404**|Not Found|No Content
+|===
+
+
+==== Consumes
+
+* `application/json`
+
+
+==== Produces
+
+* `application/json;charset=UTF-8`
+
+
+==== Tags
+
+* PermissionAPI
+
+
+==== Example HTTP request
+
+===== Request path
+----
+/seller/permission/delete
+----
+
+
+===== Request header
+[source,json]
+----
+"string"
+----
+
+
+===== Request body
+[source,json]
+----
+{
+  "code" : "string",
+  "description" : "string",
+  "id" : 0,
+  "isFinal" : 0,
+  "name" : "string",
+  "rank" : 0,
+  "status" : 0,
+  "sysPermissionGroupId" : 0
+}
+----
+
+
+==== Example HTTP response
+
+===== Response 200
+[source,json]
+----
+{
+  "code" : 0,
+  "msg" : "string"
+}
+----
+
+
+[[_deletegroupbyidusingpost]]
+=== 删除权限祖
+....
+POST /seller/permission/group/delete
+....
+
+
+==== Description
+Header中必须包含Token
+
+
+==== Parameters
+
+[options="header", cols=".^2,.^3,.^9,.^4"]
+|===
+|Type|Name|Description|Schema
+|**Header**|**Token** +
+__required__|登录成功时从服务获得的Token|string
+|**Body**|**data** +
+__required__|data: ID必须填写,其他的空缺|<<_syspermissiongroupbean,SysPermissionGroupBean>>
+|===
+
+
+==== Responses
+
+[options="header", cols=".^2,.^14,.^4"]
+|===
+|HTTP Code|Description|Schema
+|**200**|OK|<<_resultmsg,ResultMsg>>
+|**201**|Created|No Content
+|**401**|Unauthorized|No Content
+|**403**|Forbidden|No Content
+|**404**|Not Found|No Content
+|===
+
+
+==== Consumes
+
+* `application/json`
+
+
+==== Produces
+
+* `application/json;charset=UTF-8`
+
+
+==== Tags
+
+* PermissionAPI
+
+
+==== Example HTTP request
+
+===== Request path
+----
+/seller/permission/group/delete
+----
+
+
+===== Request header
+[source,json]
+----
+"string"
+----
+
+
+===== Request body
+[source,json]
+----
+{
+  "code" : "string",
+  "description" : "string",
+  "id" : 0,
+  "isFinal" : 0,
+  "name" : "string"
+}
+----
+
+
+==== Example HTTP response
+
+===== Response 200
+[source,json]
+----
+{
+  "code" : 0,
+  "msg" : "string"
+}
+----
+
+
+[[_insertgroupusingpost]]
+=== 增加权限组
+....
+POST /seller/permission/group/insert
+....
+
+
+==== Description
+Header中必须包含Token
+
+
+==== Parameters
+
+[options="header", cols=".^2,.^3,.^9,.^4"]
+|===
+|Type|Name|Description|Schema
+|**Header**|**Token** +
+__required__|登录成功时从服务获得的Token|string
+|**Body**|**data** +
+__required__|data: 名子必须填写,其他的可以空缺|<<_syspermissiongroupbean,SysPermissionGroupBean>>
+|===
+
+
+==== Responses
+
+[options="header", cols=".^2,.^14,.^4"]
+|===
+|HTTP Code|Description|Schema
+|**200**|OK|<<_resultmsg,ResultMsg>>
+|**201**|Created|No Content
+|**401**|Unauthorized|No Content
+|**403**|Forbidden|No Content
+|**404**|Not Found|No Content
+|===
+
+
+==== Consumes
+
+* `application/json`
+
+
+==== Produces
+
+* `application/json;charset=UTF-8`
+
+
+==== Tags
+
+* PermissionAPI
+
+
+==== Example HTTP request
+
+===== Request path
+----
+/seller/permission/group/insert
+----
+
+
+===== Request header
+[source,json]
+----
+"string"
+----
+
+
+===== Request body
+[source,json]
+----
+{
+  "code" : "string",
+  "description" : "string",
+  "id" : 0,
+  "isFinal" : 0,
+  "name" : "string"
+}
+----
+
+
+==== Example HTTP response
+
+===== Response 200
+[source,json]
+----
+{
+  "code" : 0,
+  "msg" : "string"
+}
+----
+
+
+[[_getpermissiongroupsusingget]]
+=== 权限组列表
+....
+GET /seller/permission/group/list
+....
+
+
+==== Description
+Header中必须包含Token
+
+
+==== Parameters
+
+[options="header", cols=".^2,.^3,.^9,.^4,.^2"]
+|===
+|Type|Name|Description|Schema|Default
+|**Header**|**Authorization** +
+__required__|Authorization|string|`"UTF-8"`
+|**Header**|**Token** +
+__required__|登录成功时从服务获得的Token|string|
+|===
+
+
+==== Responses
+
+[options="header", cols=".^2,.^14,.^4"]
+|===
+|HTTP Code|Description|Schema
+|**200**|OK|<<_409c8989ccf07affdea46f453d4bcdf4,ResultObject«ArrayList«SysPermissionGroupBean»»>>
+|**401**|Unauthorized|No Content
+|**403**|Forbidden|No Content
+|**404**|Not Found|No Content
+|===
+
+
+==== Consumes
+
+* `application/json`
+
+
+==== Produces
+
+* `application/json;charset=UTF-8`
+
+
+==== Tags
+
+* PermissionAPI
+
+
+==== Example HTTP request
+
+===== Request path
+----
+/seller/permission/group/list
+----
+
+
+===== Request header
+[source,json]
+----
+"string"
+----
+
+
+==== Example HTTP response
+
+===== Response 200
+[source,json]
+----
+{
+  "code" : 0,
+  "data" : [ {
+    "code" : "string",
+    "description" : "string",
+    "id" : 0,
+    "isFinal" : 0,
+    "name" : "string"
+  } ],
+  "msg" : "string"
+}
+----
+
+
+[[_updategroupbyidusingpost]]
+=== 更新权限组信息
+....
+POST /seller/permission/group/update
+....
+
+
+==== Description
+Header中必须包含Token
+
+
+==== Parameters
+
+[options="header", cols=".^2,.^3,.^9,.^4"]
+|===
+|Type|Name|Description|Schema
+|**Header**|**Token** +
+__required__|登录成功时从服务获得的Token|string
+|**Body**|**data** +
+__required__|data: ID必须填写,其他的可以空缺|<<_syspermissiongroupbean,SysPermissionGroupBean>>
+|===
+
+
+==== Responses
+
+[options="header", cols=".^2,.^14,.^4"]
+|===
+|HTTP Code|Description|Schema
+|**200**|OK|<<_resultmsg,ResultMsg>>
+|**201**|Created|No Content
+|**401**|Unauthorized|No Content
+|**403**|Forbidden|No Content
+|**404**|Not Found|No Content
+|===
+
+
+==== Consumes
+
+* `application/json`
+
+
+==== Produces
+
+* `application/json;charset=UTF-8`
+
+
+==== Tags
+
+* PermissionAPI
+
+
+==== Example HTTP request
+
+===== Request path
+----
+/seller/permission/group/update
+----
+
+
+===== Request header
+[source,json]
+----
+"string"
+----
+
+
+===== Request body
+[source,json]
+----
+{
+  "code" : "string",
+  "description" : "string",
+  "id" : 0,
+  "isFinal" : 0,
+  "name" : "string"
+}
+----
+
+
+==== Example HTTP response
+
+===== Response 200
+[source,json]
+----
+{
+  "code" : 0,
+  "msg" : "string"
+}
+----
+
+
+[[_insertusingpost]]
+=== 增加权限
+....
+POST /seller/permission/insert
+....
+
+
+==== Description
+Header中必须包含Token
+
+
+==== Parameters
+
+[options="header", cols=".^2,.^3,.^9,.^4,.^2"]
+|===
+|Type|Name|Description|Schema|Default
+|**Header**|**Authorization** +
+__required__|Authorization|string|`"UTF-8"`
+|**Header**|**Token** +
+__required__|登录成功时从服务获得的Token|string|
+|**Body**|**data** +
+__required__|data: 权限名,编码,祖ID必须填写,其他的可以空缺|<<_syspermissionbean,SysPermissionBean>>|
+|===
+
+
+==== Responses
+
+[options="header", cols=".^2,.^14,.^4"]
+|===
+|HTTP Code|Description|Schema
+|**200**|OK|<<_resultmsg,ResultMsg>>
+|**201**|Created|No Content
+|**401**|Unauthorized|No Content
+|**403**|Forbidden|No Content
+|**404**|Not Found|No Content
+|===
+
+
+==== Consumes
+
+* `application/json`
+
+
+==== Produces
+
+* `application/json;charset=UTF-8`
+
+
+==== Tags
+
+* PermissionAPI
+
+
+==== Example HTTP request
+
+===== Request path
+----
+/seller/permission/insert
+----
+
+
+===== Request header
+[source,json]
+----
+"string"
+----
+
+
+===== Request body
+[source,json]
+----
+{
+  "code" : "string",
+  "description" : "string",
+  "id" : 0,
+  "isFinal" : 0,
+  "name" : "string",
+  "rank" : 0,
+  "status" : 0,
+  "sysPermissionGroupId" : 0
+}
+----
+
+
+==== Example HTTP response
+
+===== Response 200
+[source,json]
+----
+{
+  "code" : 0,
+  "msg" : "string"
+}
+----
+
+
+[[_listusingpost]]
+=== 查询权限列表
+....
+POST /seller/permission/list
+....
+
+
+==== Description
+Header中必须包含Token
+
+
+==== Parameters
+
+[options="header", cols=".^2,.^3,.^9,.^4,.^2"]
+|===
+|Type|Name|Description|Schema|Default
+|**Header**|**Authorization** +
+__required__|data:pageIndex, pageSize|string|`"UTF-8"`
+|**Header**|**Token** +
+__required__|登录成功时从服务获得的Token|string|
+|**Body**|**postData** +
+__required__|postData|<<_328f1e9780ac983be9064f640973092e,PageRequestBean«SysPermissionBean»>>|
+|===
+
+
+==== Responses
+
+[options="header", cols=".^2,.^14,.^4"]
+|===
+|HTTP Code|Description|Schema
+|**200**|OK|<<_c9d7fef2dc8043d5cb9b285ca1a17b42,ResultObject«PageInfo«SysPermissionBean»»>>
+|**201**|Created|No Content
+|**401**|Unauthorized|No Content
+|**403**|Forbidden|No Content
+|**404**|Not Found|No Content
+|===
+
+
+==== Consumes
+
+* `application/json`
+
+
+==== Produces
+
+* `application/json;charset=UTF-8`
+
+
+==== Tags
+
+* PermissionAPI
+
+
+==== Example HTTP request
+
+===== Request path
+----
+/seller/permission/list
+----
+
+
+===== Request header
+[source,json]
+----
+"string"
+----
+
+
+===== Request body
+[source,json]
+----
+{
+  "data" : {
+    "code" : "string",
+    "description" : "string",
+    "id" : 0,
+    "isFinal" : 0,
+    "name" : "string",
+    "rank" : 0,
+    "status" : 0,
+    "sysPermissionGroupId" : 0
+  },
+  "pageIndex" : 0,
+  "pageSize" : 0
+}
+----
+
+
+==== Example HTTP response
+
+===== Response 200
+[source,json]
+----
+{
+  "code" : 0,
+  "data" : {
+    "pageSize" : 0,
+    "rows" : [ {
+      "code" : "string",
+      "description" : "string",
+      "id" : 0,
+      "isFinal" : 0,
+      "name" : "string",
+      "rank" : 0,
+      "status" : 0,
+      "sysPermissionGroupId" : 0
+    } ],
+    "total" : 0
+  },
+  "msg" : "string"
+}
+----
+
+
+[[_getpermissionsallusingget]]
+=== 权限列表
+....
+GET /seller/permission/listAll
+....
+
+
+==== Description
+Header中必须包含Token
+
+
+==== Parameters
+
+[options="header", cols=".^2,.^3,.^9,.^4"]
+|===
+|Type|Name|Description|Schema
+|**Header**|**Token** +
+__required__|登录成功时从服务获得的Token|string
+|===
+
+
+==== Responses
+
+[options="header", cols=".^2,.^14,.^4"]
+|===
+|HTTP Code|Description|Schema
+|**200**|OK|<<_dfff023e198e2fc468961596c545e450,ResultObject«ArrayList«SysPermissionBean»»>>
+|**401**|Unauthorized|No Content
+|**403**|Forbidden|No Content
+|**404**|Not Found|No Content
+|===
+
+
+==== Consumes
+
+* `application/json`
+
+
+==== Produces
+
+* `application/json;charset=UTF-8`
+
+
+==== Tags
+
+* PermissionAPI
+
+
+==== Example HTTP request
+
+===== Request path
+----
+/seller/permission/listAll
+----
+
+
+===== Request header
+[source,json]
+----
+"string"
+----
+
+
+==== Example HTTP response
+
+===== Response 200
+[source,json]
+----
+{
+  "code" : 0,
+  "data" : [ {
+    "code" : "string",
+    "description" : "string",
+    "id" : 0,
+    "isFinal" : 0,
+    "name" : "string",
+    "rank" : 0,
+    "status" : 0,
+    "sysPermissionGroupId" : 0
+  } ],
+  "msg" : "string"
+}
+----
+
+
+[[_getpermissionsbygroupidusingget]]
+=== 权限组内权限列表
+....
+GET /seller/permission/listByGroupId
+....
+
+
+==== Description
+Header中必须包含Token
+
+
+==== Parameters
+
+[options="header", cols=".^2,.^3,.^9,.^4"]
+|===
+|Type|Name|Description|Schema
+|**Header**|**Token** +
+__required__|登录成功时从服务获得的Token|string
+|**Query**|**groupId** +
+__required__|权限祖Id|integer (int64)
+|===
+
+
+==== Responses
+
+[options="header", cols=".^2,.^14,.^4"]
+|===
+|HTTP Code|Description|Schema
+|**200**|OK|<<_dfff023e198e2fc468961596c545e450,ResultObject«ArrayList«SysPermissionBean»»>>
+|**401**|Unauthorized|No Content
+|**403**|Forbidden|No Content
+|**404**|Not Found|No Content
+|===
+
+
+==== Consumes
+
+* `application/json`
+
+
+==== Produces
+
+* `application/json;charset=UTF-8`
+
+
+==== Tags
+
+* PermissionAPI
+
+
+==== Example HTTP request
+
+===== Request path
+----
+/seller/permission/listByGroupId
+----
+
+
+===== Request header
+[source,json]
+----
+"string"
+----
+
+
+===== Request query
+[source,json]
+----
+{
+  "groupId" : 0
+}
+----
+
+
+==== Example HTTP response
+
+===== Response 200
+[source,json]
+----
+{
+  "code" : 0,
+  "data" : [ {
+    "code" : "string",
+    "description" : "string",
+    "id" : 0,
+    "isFinal" : 0,
+    "name" : "string",
+    "rank" : 0,
+    "status" : 0,
+    "sysPermissionGroupId" : 0
+  } ],
+  "msg" : "string"
+}
+----
+
+
+[[_getpermissionsbyroleusingget]]
+=== 角色权限ID列表
+....
+GET /seller/permission/listByRole
+....
+
+
+==== Description
+Header中必须包含Token
+
+
+==== Parameters
+
+[options="header", cols=".^2,.^3,.^9,.^4"]
+|===
+|Type|Name|Description|Schema
+|**Header**|**Token** +
+__required__|登录成功时从服务获得的Token|string
+|**Query**|**roleId** +
+__required__|Role Id|integer (int64)
+|===
+
+
+==== Responses
+
+[options="header", cols=".^2,.^14,.^4"]
+|===
+|HTTP Code|Description|Schema
+|**200**|OK|<<_84aa9dcc84a167074b98b5502a68bbb4,ResultObject«List«long»»>>
+|**401**|Unauthorized|No Content
+|**403**|Forbidden|No Content
+|**404**|Not Found|No Content
+|===
+
+
+==== Consumes
+
+* `application/json`
+
+
+==== Produces
+
+* `application/json;charset=UTF-8`
+
+
+==== Tags
+
+* PermissionAPI
+
+
+==== Example HTTP request
+
+===== Request path
+----
+/seller/permission/listByRole
+----
+
+
+===== Request header
+[source,json]
+----
+"string"
+----
+
+
+===== Request query
+[source,json]
+----
+{
+  "roleId" : 0
+}
+----
+
+
+==== Example HTTP response
+
+===== Response 200
+[source,json]
+----
+{
+  "code" : 0,
+  "data" : [ 0 ],
+  "msg" : "string"
+}
+----
+
+
+[[_updateusingpost]]
+=== 更新权限信息
+....
+POST /seller/permission/update
+....
+
+
+==== Description
+Header中必须包含Token
+
+
+==== Parameters
+
+[options="header", cols=".^2,.^3,.^9,.^4,.^2"]
+|===
+|Type|Name|Description|Schema|Default
+|**Header**|**Authorization** +
+__required__|Authorization|string|`"UTF-8"`
+|**Header**|**Token** +
+__required__|登录成功时从服务获得的Token|string|
+|**Body**|**data** +
+__required__|data: ID必须填写,其他的可以空缺|<<_syspermissionbean,SysPermissionBean>>|
+|===
+
+
+==== Responses
+
+[options="header", cols=".^2,.^14,.^4"]
+|===
+|HTTP Code|Description|Schema
+|**200**|OK|<<_resultmsg,ResultMsg>>
+|**201**|Created|No Content
+|**401**|Unauthorized|No Content
+|**403**|Forbidden|No Content
+|**404**|Not Found|No Content
+|===
+
+
+==== Consumes
+
+* `application/json`
+
+
+==== Produces
+
+* `application/json;charset=UTF-8`
+
+
+==== Tags
+
+* PermissionAPI
+
+
+==== Example HTTP request
+
+===== Request path
+----
+/seller/permission/update
+----
+
+
+===== Request header
+[source,json]
+----
+"string"
+----
+
+
+===== Request body
+[source,json]
+----
+{
+  "code" : "string",
+  "description" : "string",
+  "id" : 0,
+  "isFinal" : 0,
+  "name" : "string",
+  "rank" : 0,
+  "status" : 0,
+  "sysPermissionGroupId" : 0
+}
+----
+
+
+==== Example HTTP response
+
+===== Response 200
+[source,json]
+----
+{
+  "code" : 0,
+  "msg" : "string"
+}
+----
+
+
+[[_deletebyidusingpost_1]]
+=== 删除角色
+....
+POST /seller/role/deleteById
+....
+
+
+==== Description
+Header中必须包含Token
+
+
+==== Parameters
+
+[options="header", cols=".^2,.^3,.^9,.^4"]
+|===
+|Type|Name|Description|Schema
+|**Header**|**Token** +
+__required__|登录成功时从服务获得的Token|string
+|**Body**|**data** +
+__required__|data: ID必须填写,其他的空缺|<<_userrolepermissionbean,UserRolePermissionBean>>
+|===
+
+
+==== Responses
+
+[options="header", cols=".^2,.^14,.^4"]
+|===
+|HTTP Code|Description|Schema
+|**200**|OK|<<_resultmsg,ResultMsg>>
+|**201**|Created|No Content
+|**401**|Unauthorized|No Content
+|**403**|Forbidden|No Content
+|**404**|Not Found|No Content
+|===
+
+
+==== Consumes
+
+* `application/json`
+
+
+==== Produces
+
+* `application/json;charset=UTF-8`
+
+
+==== Tags
+
+* RoleAPI
+
+
+==== Example HTTP request
+
+===== Request path
+----
+/seller/role/deleteById
+----
+
+
+===== Request header
+[source,json]
+----
+"string"
+----
+
+
+===== Request body
+[source,json]
+----
+{
+  "description" : "string",
+  "id" : 0,
+  "isFinal" : 0,
+  "name" : "string",
+  "permissionCodes" : [ "string" ],
+  "permissionGroups" : [ 0 ],
+  "rank" : 0
+}
+----
+
+
+==== Example HTTP response
+
+===== Response 200
+[source,json]
+----
+{
+  "code" : 0,
+  "msg" : "string"
+}
+----
+
+
+[[_insertusingpost_1]]
+=== 增加角色
+....
+POST /seller/role/insert
+....
+
+
+==== Description
+Header中必须包含Token
+
+
+==== Parameters
+
+[options="header", cols=".^2,.^3,.^9,.^4,.^2"]
+|===
+|Type|Name|Description|Schema|Default
+|**Header**|**Authorization** +
+__required__|Authorization|string|`"UTF-8"`
+|**Header**|**Token** +
+__required__|登录成功时从服务获得的Token|string|
+|**Body**|**data** +
+__required__|data: 名称必须填写,其他的可以空缺|<<_userrolepermissionbean,UserRolePermissionBean>>|
+|===
+
+
+==== Responses
+
+[options="header", cols=".^2,.^14,.^4"]
+|===
+|HTTP Code|Description|Schema
+|**200**|OK|<<_resultmsg,ResultMsg>>
+|**201**|Created|No Content
+|**401**|Unauthorized|No Content
+|**403**|Forbidden|No Content
+|**404**|Not Found|No Content
+|===
+
+
+==== Consumes
+
+* `application/json`
+
+
+==== Produces
+
+* `application/json;charset=UTF-8`
+
+
+==== Tags
+
+* RoleAPI
+
+
+==== Example HTTP request
+
+===== Request path
+----
+/seller/role/insert
+----
+
+
+===== Request header
+[source,json]
+----
+"string"
+----
+
+
+===== Request body
+[source,json]
+----
+{
+  "description" : "string",
+  "id" : 0,
+  "isFinal" : 0,
+  "name" : "string",
+  "permissionCodes" : [ "string" ],
+  "permissionGroups" : [ 0 ],
+  "rank" : 0
+}
+----
+
+
+==== Example HTTP response
+
+===== Response 200
+[source,json]
+----
+{
+  "code" : 0,
+  "msg" : "string"
+}
+----
+
+
+[[_listusingpost_1]]
+=== 角色列表
+....
+POST /seller/role/list
+....
+
+
+==== Description
+Header中必须包含Token
+
+
+==== Parameters
+
+[options="header", cols=".^2,.^3,.^9,.^4"]
+|===
+|Type|Name|Description|Schema
+|**Header**|**Token** +
+__required__|登录成功时从服务获得的Token|string
+|**Body**|**postData** +
+__required__|data:pageIndex, pageSize|<<_3a44fce9b457f29115373b19a379b098,PageRequestBean«SysUserBean»>>
+|===
+
+
+==== Responses
+
+[options="header", cols=".^2,.^14,.^4"]
+|===
+|HTTP Code|Description|Schema
+|**200**|OK|<<_9f70e4a73ec23823e284b284f1c75808,ResultObject«PageInfo«SysRoleBean»»>>
+|**201**|Created|No Content
+|**401**|Unauthorized|No Content
+|**403**|Forbidden|No Content
+|**404**|Not Found|No Content
+|===
+
+
+==== Consumes
+
+* `application/json`
+
+
+==== Produces
+
+* `application/json;charset=UTF-8`
+
+
+==== Tags
+
+* RoleAPI
+
+
+==== Example HTTP request
+
+===== Request path
+----
+/seller/role/list
+----
+
+
+===== Request header
+[source,json]
+----
+"string"
+----
+
+
+===== Request body
+[source,json]
+----
+{
+  "data" : {
+    "address" : "string",
+    "birth" : "string",
+    "createBy" : "string",
+    "createTime" : "string",
+    "email" : "string",
+    "enName" : "string",
+    "id" : 0,
+    "loginName" : "string",
+    "organizationId" : 0,
+    "password" : "string",
+    "permissionIds" : [ 0 ],
+    "phone" : "string",
+    "sex" : 0,
+    "updateBy" : "string",
+    "updateTime" : "string",
+    "zhName" : "string"
+  },
+  "pageIndex" : 0,
+  "pageSize" : 0
+}
+----
+
+
+==== Example HTTP response
+
+===== Response 200
+[source,json]
+----
+{
+  "code" : 0,
+  "data" : {
+    "pageSize" : 0,
+    "rows" : [ {
+      "createBy" : 0,
+      "createTime" : "string",
+      "description" : "string",
+      "id" : 0,
+      "isFinal" : 0,
+      "name" : "string",
+      "organizationId" : [ 0 ],
+      "rank" : 0,
+      "status" : 0,
+      "sysPermissionIds" : [ 0 ],
+      "updateBy" : 0,
+      "updateTime" : "string"
+    } ],
+    "total" : 0
+  },
+  "msg" : "string"
+}
+----
+
+
+[[_listbyuserusingget]]
+=== 基于当前用户的角色列表
+....
+GET /seller/role/listByUser
+....
+
+
+==== Description
+Header中必须包含Token
+
+
+==== Parameters
+
+[options="header", cols=".^2,.^3,.^9,.^4,.^2"]
+|===
+|Type|Name|Description|Schema|Default
+|**Header**|**Authorization** +
+__required__|Authorization|string|`"UTF-8"`
+|**Header**|**Token** +
+__required__|登录成功时从服务获得的Token|string|
+|===
+
+
+==== Responses
+
+[options="header", cols=".^2,.^14,.^4"]
+|===
+|HTTP Code|Description|Schema
+|**200**|OK|<<_46cbc736aa489bc075afecd80aa278e9,ResultObject«List«SysRoleBean»»>>
+|**401**|Unauthorized|No Content
+|**403**|Forbidden|No Content
+|**404**|Not Found|No Content
+|===
+
+
+==== Consumes
+
+* `application/json`
+
+
+==== Produces
+
+* `application/json;charset=UTF-8`
+
+
+==== Tags
+
+* RoleAPI
+
+
+==== Example HTTP request
+
+===== Request path
+----
+/seller/role/listByUser
+----
+
+
+===== Request header
+[source,json]
+----
+"string"
+----
+
+
+==== Example HTTP response
+
+===== Response 200
+[source,json]
+----
+{
+  "code" : 0,
+  "data" : [ {
+    "createBy" : 0,
+    "createTime" : "string",
+    "description" : "string",
+    "id" : 0,
+    "isFinal" : 0,
+    "name" : "string",
+    "organizationId" : [ 0 ],
+    "rank" : 0,
+    "status" : 0,
+    "sysPermissionIds" : [ 0 ],
+    "updateBy" : 0,
+    "updateTime" : "string"
+  } ],
+  "msg" : "string"
+}
+----
+
+
+[[_listspecialusingpost]]
+=== 角色列表
+....
+POST /seller/role/listSpecial
+....
+
+
+==== Description
+Header中必须包含Token
+
+
+==== Parameters
+
+[options="header", cols=".^2,.^3,.^9,.^4"]
+|===
+|Type|Name|Description|Schema
+|**Header**|**Token** +
+__required__|登录成功时从服务获得的Token|string
+|**Body**|**postData** +
+__required__|data|<<_userrolepermissionbean,UserRolePermissionBean>>
+|===
+
+
+==== Responses
+
+[options="header", cols=".^2,.^14,.^4"]
+|===
+|HTTP Code|Description|Schema
+|**200**|OK|<<_3eee6dbe4c445109d8b7aa532b4efd90,ResultObject«List«UserRolePermissionBean»»>>
+|**201**|Created|No Content
+|**401**|Unauthorized|No Content
+|**403**|Forbidden|No Content
+|**404**|Not Found|No Content
+|===
+
+
+==== Consumes
+
+* `application/json`
+
+
+==== Produces
+
+* `application/json;charset=UTF-8`
+
+
+==== Tags
+
+* RoleAPI
+
+
+==== Example HTTP request
+
+===== Request path
+----
+/seller/role/listSpecial
+----
+
+
+===== Request header
+[source,json]
+----
+"string"
+----
+
+
+===== Request body
+[source,json]
+----
+{
+  "description" : "string",
+  "id" : 0,
+  "isFinal" : 0,
+  "name" : "string",
+  "permissionCodes" : [ "string" ],
+  "permissionGroups" : [ 0 ],
+  "rank" : 0
+}
+----
+
+
+==== Example HTTP response
+
+===== Response 200
+[source,json]
+----
+{
+  "code" : 0,
+  "data" : [ {
+    "description" : "string",
+    "id" : 0,
+    "isFinal" : 0,
+    "name" : "string",
+    "permissionCodes" : [ "string" ],
+    "permissionGroups" : [ 0 ],
+    "rank" : 0
+  } ],
+  "msg" : "string"
+}
+----
+
+
+[[_childrenlistusingget]]
+=== 子组织列表
+....
+GET /seller/role/org/childrenList
+....
+
+
+==== Description
+Header中必须包含Token
+
+
+==== Parameters
+
+[options="header", cols=".^2,.^3,.^9,.^4"]
+|===
+|Type|Name|Description|Schema
+|**Header**|**Token** +
+__required__|登录成功时从服务获得的Token|string
+|**Query**|**id** +
+__required__|current organization id|integer (int64)
+|===
+
+
+==== Responses
+
+[options="header", cols=".^2,.^14,.^4"]
+|===
+|HTTP Code|Description|Schema
+|**200**|OK|<<_72c21cfae45dca916ac9e5ac2418a870,ResultObject«PageInfo«SysOrganizationTree»»>>
+|**401**|Unauthorized|No Content
+|**403**|Forbidden|No Content
+|**404**|Not Found|No Content
+|===
+
+
+==== Consumes
+
+* `application/json`
+
+
+==== Produces
+
+* `application/json;charset=UTF-8`
+
+
+==== Tags
+
+* RoleAPI
+
+
+==== Example HTTP request
+
+===== Request path
+----
+/seller/role/org/childrenList
+----
+
+
+===== Request header
+[source,json]
+----
+"string"
+----
+
+
+===== Request query
+[source,json]
+----
+{
+  "id" : 0
+}
+----
+
+
+==== Example HTTP response
+
+===== Response 200
+[source,json]
+----
+{
+  "code" : 0,
+  "data" : {
+    "pageSize" : 0,
+    "rows" : [ {
+      "children" : [ {
+        "children" : [ "..." ],
+        "createBy" : 0,
+        "createTime" : "string",
+        "description" : "string",
+        "fullName" : "string",
+        "id" : 0,
+        "isFinal" : 0,
+        "name" : "string",
+        "parentId" : 0,
+        "rank" : 0,
+        "status" : 0,
+        "updateBy" : 0,
+        "updateTime" : "string"
+      } ],
+      "createBy" : 0,
+      "createTime" : "string",
+      "description" : "string",
+      "fullName" : "string",
+      "id" : 0,
+      "isFinal" : 0,
+      "name" : "string",
+      "parentId" : 0,
+      "rank" : 0,
+      "status" : 0,
+      "updateBy" : 0,
+      "updateTime" : "string"
+    } ],
+    "total" : 0
+  },
+  "msg" : "string"
+}
+----
+
+
+[[_deleteorgbyidusingpost]]
+=== 删除组织
+....
+POST /seller/role/org/delete
+....
+
+
+==== Description
+Header中必须包含Token
+
+
+==== Parameters
+
+[options="header", cols=".^2,.^3,.^9,.^4"]
+|===
+|Type|Name|Description|Schema
+|**Header**|**Token** +
+__required__|登录成功时从服务获得的Token|string
+|**Body**|**data** +
+__required__|data: ID必须填写,其他的空缺|<<_sysorganizationlistbean,SysOrganizationListBean>>
+|===
+
+
+==== Responses
+
+[options="header", cols=".^2,.^14,.^4"]
+|===
+|HTTP Code|Description|Schema
+|**200**|OK|<<_resultmsg,ResultMsg>>
+|**201**|Created|No Content
+|**401**|Unauthorized|No Content
+|**403**|Forbidden|No Content
+|**404**|Not Found|No Content
+|===
+
+
+==== Consumes
+
+* `application/json`
+
+
+==== Produces
+
+* `application/json;charset=UTF-8`
+
+
+==== Tags
+
+* RoleAPI
+
+
+==== Example HTTP request
+
+===== Request path
+----
+/seller/role/org/delete
+----
+
+
+===== Request header
+[source,json]
+----
+"string"
+----
+
+
+===== Request body
+[source,json]
+----
+{
+  "description" : "string",
+  "fullName" : "string",
+  "id" : 0,
+  "isFinal" : 0,
+  "name" : "string",
+  "parentId" : 0,
+  "rank" : 0,
+  "roleIds" : [ 0 ],
+  "roles" : "string"
+}
+----
+
+
+==== Example HTTP response
+
+===== Response 200
+[source,json]
+----
+{
+  "code" : 0,
+  "msg" : "string"
+}
+----
+
+
+[[_insertorgusingpost]]
+=== 增加组织
+....
+POST /seller/role/org/insert
+....
+
+
+==== Description
+Header中必须包含Token
+
+
+==== Parameters
+
+[options="header", cols=".^2,.^3,.^9,.^4,.^2"]
+|===
+|Type|Name|Description|Schema|Default
+|**Header**|**Authorization** +
+__required__|Authorization|string|`"UTF-8"`
+|**Header**|**Token** +
+__required__|登录成功时从服务获得的Token|string|
+|**Body**|**data** +
+__required__|data: 名称,全名必须填写,其他的可以空缺|<<_sysorganizationlistbean,SysOrganizationListBean>>|
+|===
+
+
+==== Responses
+
+[options="header", cols=".^2,.^14,.^4"]
+|===
+|HTTP Code|Description|Schema
+|**200**|OK|<<_resultmsg,ResultMsg>>
+|**201**|Created|No Content
+|**401**|Unauthorized|No Content
+|**403**|Forbidden|No Content
+|**404**|Not Found|No Content
+|===
+
+
+==== Consumes
+
+* `application/json`
+
+
+==== Produces
+
+* `application/json;charset=UTF-8`
+
+
+==== Tags
+
+* RoleAPI
+
+
+==== Example HTTP request
+
+===== Request path
+----
+/seller/role/org/insert
+----
+
+
+===== Request header
+[source,json]
+----
+"string"
+----
+
+
+===== Request body
+[source,json]
+----
+{
+  "description" : "string",
+  "fullName" : "string",
+  "id" : 0,
+  "isFinal" : 0,
+  "name" : "string",
+  "parentId" : 0,
+  "rank" : 0,
+  "roleIds" : [ 0 ],
+  "roles" : "string"
+}
+----
+
+
+==== Example HTTP response
+
+===== Response 200
+[source,json]
+----
+{
+  "code" : 0,
+  "msg" : "string"
+}
+----
+
+
+[[_orglistusingpost]]
+=== 组织列表
+....
+POST /seller/role/org/list
+....
+
+
+==== Description
+Header中必须包含Token
+
+
+==== Parameters
+
+[options="header", cols=".^2,.^3,.^9,.^4"]
+|===
+|Type|Name|Description|Schema
+|**Header**|**Token** +
+__required__|登录成功时从服务获得的Token|string
+|**Body**|**postData** +
+__required__|data:pageIndex, pageSize, id|<<_3a44fce9b457f29115373b19a379b098,PageRequestBean«SysUserBean»>>
+|===
+
+
+==== Responses
+
+[options="header", cols=".^2,.^14,.^4"]
+|===
+|HTTP Code|Description|Schema
+|**200**|OK|<<_72c21cfae45dca916ac9e5ac2418a870,ResultObject«PageInfo«SysOrganizationTree»»>>
+|**201**|Created|No Content
+|**401**|Unauthorized|No Content
+|**403**|Forbidden|No Content
+|**404**|Not Found|No Content
+|===
+
+
+==== Consumes
+
+* `application/json`
+
+
+==== Produces
+
+* `application/json;charset=UTF-8`
+
+
+==== Tags
+
+* RoleAPI
+
+
+==== Example HTTP request
+
+===== Request path
+----
+/seller/role/org/list
+----
+
+
+===== Request header
+[source,json]
+----
+"string"
+----
+
+
+===== Request body
+[source,json]
+----
+{
+  "data" : {
+    "address" : "string",
+    "birth" : "string",
+    "createBy" : "string",
+    "createTime" : "string",
+    "email" : "string",
+    "enName" : "string",
+    "id" : 0,
+    "loginName" : "string",
+    "organizationId" : 0,
+    "password" : "string",
+    "permissionIds" : [ 0 ],
+    "phone" : "string",
+    "sex" : 0,
+    "updateBy" : "string",
+    "updateTime" : "string",
+    "zhName" : "string"
+  },
+  "pageIndex" : 0,
+  "pageSize" : 0
+}
+----
+
+
+==== Example HTTP response
+
+===== Response 200
+[source,json]
+----
+{
+  "code" : 0,
+  "data" : {
+    "pageSize" : 0,
+    "rows" : [ {
+      "children" : [ {
+        "children" : [ "..." ],
+        "createBy" : 0,
+        "createTime" : "string",
+        "description" : "string",
+        "fullName" : "string",
+        "id" : 0,
+        "isFinal" : 0,
+        "name" : "string",
+        "parentId" : 0,
+        "rank" : 0,
+        "status" : 0,
+        "updateBy" : 0,
+        "updateTime" : "string"
+      } ],
+      "createBy" : 0,
+      "createTime" : "string",
+      "description" : "string",
+      "fullName" : "string",
+      "id" : 0,
+      "isFinal" : 0,
+      "name" : "string",
+      "parentId" : 0,
+      "rank" : 0,
+      "status" : 0,
+      "updateBy" : 0,
+      "updateTime" : "string"
+    } ],
+    "total" : 0
+  },
+  "msg" : "string"
+}
+----
+
+
+[[_listallusingget]]
+=== 查询组织信息列表
+....
+GET /seller/role/org/listAll
+....
+
+
+==== Description
+Header中必须包含Token
+
+
+==== Parameters
+
+[options="header", cols=".^2,.^3,.^9,.^4"]
+|===
+|Type|Name|Description|Schema
+|**Header**|**Token** +
+__required__|登录成功时从服务获得的Token|string
+|===
+
+
+==== Responses
+
+[options="header", cols=".^2,.^14,.^4"]
+|===
+|HTTP Code|Description|Schema
+|**200**|OK|<<_afab1f1e9b9df8cb28b23858d94012bf,ResultObject«List«SysOrganizationListBean»»>>
+|**401**|Unauthorized|No Content
+|**403**|Forbidden|No Content
+|**404**|Not Found|No Content
+|===
+
+
+==== Consumes
+
+* `application/json`
+
+
+==== Produces
+
+* `application/json;charset=UTF-8`
+
+
+==== Tags
+
+* RoleAPI
+
+
+==== Example HTTP request
+
+===== Request path
+----
+/seller/role/org/listAll
+----
+
+
+===== Request header
+[source,json]
+----
+"string"
+----
+
+
+==== Example HTTP response
+
+===== Response 200
+[source,json]
+----
+{
+  "code" : 0,
+  "data" : [ {
+    "description" : "string",
+    "fullName" : "string",
+    "id" : 0,
+    "isFinal" : 0,
+    "name" : "string",
+    "parentId" : 0,
+    "rank" : 0,
+    "roleIds" : [ 0 ],
+    "roles" : "string"
+  } ],
+  "msg" : "string"
+}
+----
+
+
+[[_orglistspecialusingpost]]
+=== 查询组织
+....
+POST /seller/role/org/listSpecial
+....
+
+
+==== Description
+Header中必须包含Token
+
+
+==== Parameters
+
+[options="header", cols=".^2,.^3,.^9,.^4"]
+|===
+|Type|Name|Description|Schema
+|**Header**|**Token** +
+__required__|登录成功时从服务获得的Token|string
+|**Body**|**postData** +
+__required__|data:pageIndex, pageSize|<<_be3e0cc2329862b2afcc8f35f3879c56,PageRequestBean«SysOrganizationListBean»>>
+|===
+
+
+==== Responses
+
+[options="header", cols=".^2,.^14,.^4"]
+|===
+|HTTP Code|Description|Schema
+|**200**|OK|<<_c6105361b3991475d61b6b41e1e8a3aa,ResultObject«PageInfo«SysOrganizationListBean»»>>
+|**201**|Created|No Content
+|**401**|Unauthorized|No Content
+|**403**|Forbidden|No Content
+|**404**|Not Found|No Content
+|===
+
+
+==== Consumes
+
+* `application/json`
+
+
+==== Produces
+
+* `application/json;charset=UTF-8`
+
+
+==== Tags
+
+* RoleAPI
+
+
+==== Example HTTP request
+
+===== Request path
+----
+/seller/role/org/listSpecial
+----
+
+
+===== Request header
+[source,json]
+----
+"string"
+----
+
+
+===== Request body
+[source,json]
+----
+{
+  "data" : {
+    "description" : "string",
+    "fullName" : "string",
+    "id" : 0,
+    "isFinal" : 0,
+    "name" : "string",
+    "parentId" : 0,
+    "rank" : 0,
+    "roleIds" : [ 0 ],
+    "roles" : "string"
+  },
+  "pageIndex" : 0,
+  "pageSize" : 0
+}
+----
+
+
+==== Example HTTP response
+
+===== Response 200
+[source,json]
+----
+{
+  "code" : 0,
+  "data" : {
+    "pageSize" : 0,
+    "rows" : [ {
+      "description" : "string",
+      "fullName" : "string",
+      "id" : 0,
+      "isFinal" : 0,
+      "name" : "string",
+      "parentId" : 0,
+      "rank" : 0,
+      "roleIds" : [ 0 ],
+      "roles" : "string"
+    } ],
+    "total" : 0
+  },
+  "msg" : "string"
+}
+----
+
+
+[[_orgranksusingget]]
+=== 组织层级列表
+....
+GET /seller/role/org/ranks
+....
+
+
+==== Description
+Header中必须包含Token
+
+
+==== Parameters
+
+[options="header", cols=".^2,.^3,.^9,.^4"]
+|===
+|Type|Name|Description|Schema
+|**Header**|**Token** +
+__required__|登录成功时从服务获得的Token|string
+|===
+
+
+==== Responses
+
+[options="header", cols=".^2,.^14,.^4"]
+|===
+|HTTP Code|Description|Schema
+|**200**|OK|<<_84aa9dcc84a167074b98b5502a68bbb4,ResultObject«List«long»»>>
+|**401**|Unauthorized|No Content
+|**403**|Forbidden|No Content
+|**404**|Not Found|No Content
+|===
+
+
+==== Consumes
+
+* `application/json`
+
+
+==== Produces
+
+* `application/json;charset=UTF-8`
+
+
+==== Tags
+
+* RoleAPI
+
+
+==== Example HTTP request
+
+===== Request path
+----
+/seller/role/org/ranks
+----
+
+
+===== Request header
+[source,json]
+----
+"string"
+----
+
+
+==== Example HTTP response
+
+===== Response 200
+[source,json]
+----
+{
+  "code" : 0,
+  "data" : [ 0 ],
+  "msg" : "string"
+}
+----
+
+
+[[_listbyorgidusingget]]
+=== 查询组织信息
+....
+GET /seller/role/org/selectById
+....
+
+
+==== Description
+Header中必须包含Token
+
+
+==== Parameters
+
+[options="header", cols=".^2,.^3,.^9,.^4"]
+|===
+|Type|Name|Description|Schema
+|**Header**|**Token** +
+__required__|登录成功时从服务获得的Token|string
+|**Query**|**id** +
+__required__|data:pageIndex, pageSize|integer (int64)
+|===
+
+
+==== Responses
+
+[options="header", cols=".^2,.^14,.^4"]
+|===
+|HTTP Code|Description|Schema
+|**200**|OK|<<_a3521d80014e1921c3bd0076bbdbf081,ResultObject«SysOrganizationTree»>>
+|**401**|Unauthorized|No Content
+|**403**|Forbidden|No Content
+|**404**|Not Found|No Content
+|===
+
+
+==== Consumes
+
+* `application/json`
+
+
+==== Produces
+
+* `application/json;charset=UTF-8`
+
+
+==== Tags
+
+* RoleAPI
+
+
+==== Example HTTP request
+
+===== Request path
+----
+/seller/role/org/selectById
+----
+
+
+===== Request header
+[source,json]
+----
+"string"
+----
+
+
+===== Request query
+[source,json]
+----
+{
+  "id" : 0
+}
+----
+
+
+==== Example HTTP response
+
+===== Response 200
+[source,json]
+----
+{
+  "code" : 0,
+  "data" : {
+    "children" : [ {
+      "children" : [ "..." ],
+      "createBy" : 0,
+      "createTime" : "string",
+      "description" : "string",
+      "fullName" : "string",
+      "id" : 0,
+      "isFinal" : 0,
+      "name" : "string",
+      "parentId" : 0,
+      "rank" : 0,
+      "status" : 0,
+      "updateBy" : 0,
+      "updateTime" : "string"
+    } ],
+    "createBy" : 0,
+    "createTime" : "string",
+    "description" : "string",
+    "fullName" : "string",
+    "id" : 0,
+    "isFinal" : 0,
+    "name" : "string",
+    "parentId" : 0,
+    "rank" : 0,
+    "status" : 0,
+    "updateBy" : 0,
+    "updateTime" : "string"
+  },
+  "msg" : "string"
+}
+----
+
+
+[[_orgtreeusingget]]
+=== 查询组织分层信息
+....
+GET /seller/role/org/tree
+....
+
+
+==== Description
+Header中必须包含Token
+
+
+==== Parameters
+
+[options="header", cols=".^2,.^3,.^9,.^4,.^2"]
+|===
+|Type|Name|Description|Schema|Default
+|**Header**|**Authorization** +
+__required__|Authorization|string|`"UTF-8"`
+|**Header**|**Token** +
+__required__|登录成功时从服务获得的Token|string|
+|===
+
+
+==== Responses
+
+[options="header", cols=".^2,.^14,.^4"]
+|===
+|HTTP Code|Description|Schema
+|**200**|OK|<<_102eb6bca4845172d09d75b432dc5aa4,ResultObject«List«SysOrganizationTree»»>>
+|**401**|Unauthorized|No Content
+|**403**|Forbidden|No Content
+|**404**|Not Found|No Content
+|===
+
+
+==== Consumes
+
+* `application/json`
+
+
+==== Produces
+
+* `application/json;charset=UTF-8`
+
+
+==== Tags
+
+* RoleAPI
+
+
+==== Example HTTP request
+
+===== Request path
+----
+/seller/role/org/tree
+----
+
+
+===== Request header
+[source,json]
+----
+"string"
+----
+
+
+==== Example HTTP response
+
+===== Response 200
+[source,json]
+----
+{
+  "code" : 0,
+  "data" : [ {
+    "children" : [ {
+      "children" : [ "..." ],
+      "createBy" : 0,
+      "createTime" : "string",
+      "description" : "string",
+      "fullName" : "string",
+      "id" : 0,
+      "isFinal" : 0,
+      "name" : "string",
+      "parentId" : 0,
+      "rank" : 0,
+      "status" : 0,
+      "updateBy" : 0,
+      "updateTime" : "string"
+    } ],
+    "createBy" : 0,
+    "createTime" : "string",
+    "description" : "string",
+    "fullName" : "string",
+    "id" : 0,
+    "isFinal" : 0,
+    "name" : "string",
+    "parentId" : 0,
+    "rank" : 0,
+    "status" : 0,
+    "updateBy" : 0,
+    "updateTime" : "string"
+  } ],
+  "msg" : "string"
+}
+----
+
+
+[[_updateorgusingpost]]
+=== 更新组织信息
+....
+POST /seller/role/org/update
+....
+
+
+==== Description
+Header中必须包含Token
+
+
+==== Parameters
+
+[options="header", cols=".^2,.^3,.^9,.^4,.^2"]
+|===
+|Type|Name|Description|Schema|Default
+|**Header**|**Authorization** +
+__required__|Authorization|string|`"UTF-8"`
+|**Header**|**Token** +
+__required__|登录成功时从服务获得的Token|string|
+|**Body**|**data** +
+__required__|data: ID必须填写,其他的可以空缺|<<_sysorganizationlistbean,SysOrganizationListBean>>|
+|===
+
+
+==== Responses
+
+[options="header", cols=".^2,.^14,.^4"]
+|===
+|HTTP Code|Description|Schema
+|**200**|OK|<<_resultmsg,ResultMsg>>
+|**201**|Created|No Content
+|**401**|Unauthorized|No Content
+|**403**|Forbidden|No Content
+|**404**|Not Found|No Content
+|===
+
+
+==== Consumes
+
+* `application/json`
+
+
+==== Produces
+
+* `application/json;charset=UTF-8`
+
+
+==== Tags
+
+* RoleAPI
+
+
+==== Example HTTP request
+
+===== Request path
+----
+/seller/role/org/update
+----
+
+
+===== Request header
+[source,json]
+----
+"string"
+----
+
+
+===== Request body
+[source,json]
+----
+{
+  "description" : "string",
+  "fullName" : "string",
+  "id" : 0,
+  "isFinal" : 0,
+  "name" : "string",
+  "parentId" : 0,
+  "rank" : 0,
+  "roleIds" : [ 0 ],
+  "roles" : "string"
+}
+----
+
+
+==== Example HTTP response
+
+===== Response 200
+[source,json]
+----
+{
+  "code" : 0,
+  "msg" : "string"
+}
+----
+
+
+[[_userinorgtreeusingget]]
+=== 查询用户组织层次列表
+....
+GET /seller/role/org/userInTree
+....
+
+
+==== Description
+Header中必须包含Token
+
+
+==== Parameters
+
+[options="header", cols=".^2,.^3,.^9,.^4"]
+|===
+|Type|Name|Description|Schema
+|**Header**|**Token** +
+__required__|登录成功时从服务获得的Token|string
+|**Query**|**id** +
+__required__|organization Id|integer (int64)
+|===
+
+
+==== Responses
+
+[options="header", cols=".^2,.^14,.^4"]
+|===
+|HTTP Code|Description|Schema
+|**200**|OK|<<_84aa9dcc84a167074b98b5502a68bbb4,ResultObject«List«long»»>>
+|**401**|Unauthorized|No Content
+|**403**|Forbidden|No Content
+|**404**|Not Found|No Content
+|===
+
+
+==== Consumes
+
+* `application/json`
+
+
+==== Produces
+
+* `application/json;charset=UTF-8`
+
+
+==== Tags
+
+* RoleAPI
+
+
+==== Example HTTP request
+
+===== Request path
+----
+/seller/role/org/userInTree
+----
+
+
+===== Request header
+[source,json]
+----
+"string"
+----
+
+
+===== Request query
+[source,json]
+----
+{
+  "id" : 0
+}
+----
+
+
+==== Example HTTP response
+
+===== Response 200
+[source,json]
+----
+{
+  "code" : 0,
+  "data" : [ 0 ],
+  "msg" : "string"
+}
+----
+
+
+[[_selectbyidusingget]]
+=== 查询角色信息
+....
+GET /seller/role/selectById
+....
+
+
+==== Description
+Header中必须包含Token
+
+
+==== Parameters
+
+[options="header", cols=".^2,.^3,.^9,.^4"]
+|===
+|Type|Name|Description|Schema
+|**Header**|**Token** +
+__required__|登录成功时从服务获得的Token|string
+|**Query**|**id** +
+__required__|data:pageIndex, pageSize|integer (int64)
+|===
+
+
+==== Responses
+
+[options="header", cols=".^2,.^14,.^4"]
+|===
+|HTTP Code|Description|Schema
+|**200**|OK|<<_84c97940e7fa3691d50dda714ec053f9,ResultObject«SysRoleBean»>>
+|**401**|Unauthorized|No Content
+|**403**|Forbidden|No Content
+|**404**|Not Found|No Content
+|===
+
+
+==== Consumes
+
+* `application/json`
+
+
+==== Produces
+
+* `application/json;charset=UTF-8`
+
+
+==== Tags
+
+* RoleAPI
+
+
+==== Example HTTP request
+
+===== Request path
+----
+/seller/role/selectById
+----
+
+
+===== Request header
+[source,json]
+----
+"string"
+----
+
+
+===== Request query
+[source,json]
+----
+{
+  "id" : 0
+}
+----
+
+
+==== Example HTTP response
+
+===== Response 200
+[source,json]
+----
+{
+  "code" : 0,
+  "data" : {
+    "createBy" : 0,
+    "createTime" : "string",
+    "description" : "string",
+    "id" : 0,
+    "isFinal" : 0,
+    "name" : "string",
+    "organizationId" : [ 0 ],
+    "rank" : 0,
+    "status" : 0,
+    "sysPermissionIds" : [ 0 ],
+    "updateBy" : 0,
+    "updateTime" : "string"
+  },
+  "msg" : "string"
+}
+----
+
+
+[[_updateusingpost_1]]
+=== 更新角色信息
+....
+POST /seller/role/update
+....
+
+
+==== Description
+Header中必须包含Token
+
+
+==== Parameters
+
+[options="header", cols=".^2,.^3,.^9,.^4,.^2"]
+|===
+|Type|Name|Description|Schema|Default
+|**Header**|**Authorization** +
+__required__|Authorization|string|`"UTF-8"`
+|**Header**|**Token** +
+__required__|登录成功时从服务获得的Token|string|
+|**Body**|**data** +
+__required__|data: ID必须填写,其他的可以空缺|<<_userrolepermissionbean,UserRolePermissionBean>>|
+|===
+
+
+==== Responses
+
+[options="header", cols=".^2,.^14,.^4"]
+|===
+|HTTP Code|Description|Schema
+|**200**|OK|<<_resultmsg,ResultMsg>>
+|**201**|Created|No Content
+|**401**|Unauthorized|No Content
+|**403**|Forbidden|No Content
+|**404**|Not Found|No Content
+|===
+
+
+==== Consumes
+
+* `application/json`
+
+
+==== Produces
+
+* `application/json;charset=UTF-8`
+
+
+==== Tags
+
+* RoleAPI
+
+
+==== Example HTTP request
+
+===== Request path
+----
+/seller/role/update
+----
+
+
+===== Request header
+[source,json]
+----
+"string"
+----
+
+
+===== Request body
+[source,json]
+----
+{
+  "description" : "string",
+  "id" : 0,
+  "isFinal" : 0,
+  "name" : "string",
+  "permissionCodes" : [ "string" ],
+  "permissionGroups" : [ 0 ],
+  "rank" : 0
+}
+----
+
+
+==== Example HTTP response
+
+===== Response 200
+[source,json]
+----
+{
+  "code" : 0,
+  "msg" : "string"
+}
+----
+
+
+[[_deluserbynameusingpost]]
+=== 删除用户
+....
+POST /seller/user/deleteByName
+....
+
+
+==== Description
+需要管理员权限
+
+
+==== Parameters
+
+[options="header", cols=".^2,.^3,.^9,.^4"]
+|===
+|Type|Name|Description|Schema
+|**Header**|**Token** +
+__required__|登录成功时从服务获得的Token|string
+|**Body**|**data** +
+__required__|data:用户名,必须填写,其他的可以空缺|<<_loginbean,LoginBean>>
+|===
+
+
+==== Responses
+
+[options="header", cols=".^2,.^14,.^4"]
+|===
+|HTTP Code|Description|Schema
+|**200**|OK|<<_resultmsg,ResultMsg>>
+|**201**|Created|No Content
+|**401**|Unauthorized|No Content
+|**403**|Forbidden|No Content
+|**404**|Not Found|No Content
+|===
+
+
+==== Consumes
+
+* `application/json`
+
+
+==== Produces
+
+* `application/json;charset=UTF-8`
+
+
+==== Tags
+
+* userAPI
+
+
+==== Example HTTP request
+
+===== Request path
+----
+/seller/user/deleteByName
+----
+
+
+===== Request header
+[source,json]
+----
+"string"
+----
+
+
+===== Request body
+[source,json]
+----
+{
+  "code" : "string",
+  "oldPassword" : "string",
+  "password" : "string",
+  "username" : "string"
+}
+----
+
+
+==== Example HTTP response
+
+===== Response 200
+[source,json]
+----
+{
+  "code" : 0,
+  "msg" : "string"
+}
+----
+
+
+[[_getuserinfousingget]]
+=== 获取用户信息
+....
+GET /seller/user/info
+....
+
+
+==== Description
+Header中必须包含Token
+
+
+==== Parameters
+
+[options="header", cols=".^2,.^3,.^9,.^4"]
+|===
+|Type|Name|Description|Schema
+|**Header**|**Token** +
+__required__|登录成功时从服务获得的Token|string
+|**Query**|**username** +
+__required__|用户名|string
+|===
+
+
+==== Responses
+
+[options="header", cols=".^2,.^14,.^4"]
+|===
+|HTTP Code|Description|Schema
+|**200**|OK|<<_f1ae6dc707baa0aeea21d66ca14d4a26,ResultObject«SysUserBean»>>
+|**401**|Unauthorized|No Content
+|**403**|Forbidden|No Content
+|**404**|Not Found|No Content
+|===
+
+
+==== Consumes
+
+* `application/json`
+
+
+==== Produces
+
+* `application/json;charset=UTF-8`
+
+
+==== Tags
+
+* userAPI
+
+
+==== Example HTTP request
+
+===== Request path
+----
+/seller/user/info
+----
+
+
+===== Request header
+[source,json]
+----
+"string"
+----
+
+
+===== Request query
+[source,json]
+----
+{
+  "username" : "string"
+}
+----
+
+
+==== Example HTTP response
+
+===== Response 200
+[source,json]
+----
+{
+  "code" : 0,
+  "data" : {
+    "address" : "string",
+    "birth" : "string",
+    "createBy" : "string",
+    "createTime" : "string",
+    "email" : "string",
+    "enName" : "string",
+    "id" : 0,
+    "loginName" : "string",
+    "organizationId" : 0,
+    "password" : "string",
+    "permissionIds" : [ 0 ],
+    "phone" : "string",
+    "sex" : 0,
+    "updateBy" : "string",
+    "updateTime" : "string",
+    "zhName" : "string"
+  },
+  "msg" : "string"
+}
+----
+
+
+[[_insertusingpost_2]]
+=== 注册
+....
+POST /seller/user/insert
+....
+
+
+==== Description
+需要先获取验证码
+
+
+==== Parameters
+
+[options="header", cols=".^2,.^3,.^9,.^4,.^2"]
+|===
+|Type|Name|Description|Schema|Default
+|**Header**|**Authorization** +
+__required__|data:用户名,密码,必须填写,其他的可以空缺|string|`"UTF-8"`
+|**Header**|**Token** +
+__required__|登录成功时从服务获得的Token|string|
+|**Body**|**data** +
+__required__|data|<<_sysuserbean,SysUserBean>>|
+|===
+
+
+==== Responses
+
+[options="header", cols=".^2,.^14,.^4"]
+|===
+|HTTP Code|Description|Schema
+|**200**|OK|<<_resultmsg,ResultMsg>>
+|**201**|Created|No Content
+|**401**|Unauthorized|No Content
+|**403**|Forbidden|No Content
+|**404**|Not Found|No Content
+|===
+
+
+==== Consumes
+
+* `application/json`
+
+
+==== Produces
+
+* `application/json;charset=UTF-8`
+
+
+==== Tags
+
+* userAPI
+
+
+==== Example HTTP request
+
+===== Request path
+----
+/seller/user/insert
+----
+
+
+===== Request header
+[source,json]
+----
+"string"
+----
+
+
+===== Request body
+[source,json]
+----
+{
+  "address" : "string",
+  "birth" : "string",
+  "createBy" : "string",
+  "createTime" : "string",
+  "email" : "string",
+  "enName" : "string",
+  "id" : 0,
+  "loginName" : "string",
+  "organizationId" : 0,
+  "password" : "string",
+  "permissionIds" : [ 0 ],
+  "phone" : "string",
+  "sex" : 0,
+  "updateBy" : "string",
+  "updateTime" : "string",
+  "zhName" : "string"
+}
+----
+
+
+==== Example HTTP response
+
+===== Response 200
+[source,json]
+----
+{
+  "code" : 0,
+  "msg" : "string"
+}
+----
+
+
+[[_listusingpost_2]]
+=== 查询用户列表
+....
+POST /seller/user/list
+....
+
+
+==== Parameters
+
+[options="header", cols=".^2,.^3,.^9,.^4,.^2"]
+|===
+|Type|Name|Description|Schema|Default
+|**Header**|**Authorization** +
+__required__|data:搜索条件|string|`"UTF-8"`
+|**Header**|**Token** +
+__required__|登录成功时从服务获得的Token|string|
+|**Body**|**postData** +
+__required__|postData|<<_sysusersearchbean,SysUserSearchBean>>|
+|===
+
+
+==== Responses
+
+[options="header", cols=".^2,.^14,.^4"]
+|===
+|HTTP Code|Description|Schema
+|**200**|OK|<<_2ffa1fefc2924b40c62fbfb4f6076f3a,ResultObject«PageInfo«SysUserBean»»>>
+|**201**|Created|No Content
+|**401**|Unauthorized|No Content
+|**403**|Forbidden|No Content
+|**404**|Not Found|No Content
+|===
+
+
+==== Consumes
+
+* `application/json`
+
+
+==== Produces
+
+* `application/json;charset=UTF-8`
+
+
+==== Tags
+
+* userAPI
+
+
+==== Example HTTP request
+
+===== Request path
+----
+/seller/user/list
+----
+
+
+===== Request header
+[source,json]
+----
+"string"
+----
+
+
+===== Request body
+[source,json]
+----
+{
+  "address" : "string",
+  "birth" : "string",
+  "code" : "string",
+  "createBy" : "string",
+  "createTimeEnd" : "string",
+  "createTimeStart" : "string",
+  "email" : "string",
+  "enName" : "string",
+  "loginName" : "string",
+  "pageIndex" : 0,
+  "pageSize" : 0,
+  "password" : "string",
+  "phone" : "string",
+  "sex" : 0,
+  "updateBy" : "string",
+  "updateTimeEnd" : "string",
+  "updateTimeStart" : "string",
+  "zhName" : "string"
+}
+----
+
+
+==== Example HTTP response
+
+===== Response 200
+[source,json]
+----
+{
+  "code" : 0,
+  "data" : {
+    "pageSize" : 0,
+    "rows" : [ {
+      "address" : "string",
+      "birth" : "string",
+      "createBy" : "string",
+      "createTime" : "string",
+      "email" : "string",
+      "enName" : "string",
+      "id" : 0,
+      "loginName" : "string",
+      "organizationId" : 0,
+      "password" : "string",
+      "permissionIds" : [ 0 ],
+      "phone" : "string",
+      "sex" : 0,
+      "updateBy" : "string",
+      "updateTime" : "string",
+      "zhName" : "string"
+    } ],
+    "total" : 0
+  },
+  "msg" : "string"
+}
+----
+
+
+[[_updatepermissionusingpost]]
+=== 更新用户权限
+....
+POST /seller/user/permission/update
+....
+
+
+==== Description
+Header中必须包含Token
+
+
+==== Parameters
+
+[options="header", cols=".^2,.^3,.^9,.^4"]
+|===
+|Type|Name|Description|Schema
+|**Header**|**Token** +
+__required__|登录成功时从服务获得的Token|string
+|**Body**|**data** +
+__required__|data:用户ID, 权限ID|<<_sysuserpermissionbean,SysUserPermissionBean>>
+|===
+
+
+==== Responses
+
+[options="header", cols=".^2,.^14,.^4"]
+|===
+|HTTP Code|Description|Schema
+|**200**|OK|<<_resultmsg,ResultMsg>>
+|**201**|Created|No Content
+|**401**|Unauthorized|No Content
+|**403**|Forbidden|No Content
+|**404**|Not Found|No Content
+|===
+
+
+==== Consumes
+
+* `application/json`
+
+
+==== Produces
+
+* `application/json;charset=UTF-8`
+
+
+==== Tags
+
+* userAPI
+
+
+==== Example HTTP request
+
+===== Request path
+----
+/seller/user/permission/update
+----
+
+
+===== Request header
+[source,json]
+----
+"string"
+----
+
+
+===== Request body
+[source,json]
+----
+{
+  "rolePermissionIds" : [ 0 ],
+  "sysUserId" : 0
+}
+----
+
+
+==== Example HTTP response
+
+===== Response 200
+[source,json]
+----
+{
+  "code" : 0,
+  "msg" : "string"
+}
+----
+
+
+[[_registryusingpost]]
+=== 注册
+....
+POST /seller/user/registry
+....
+
+
+==== Description
+需要先获取验证码
+
+
+==== Parameters
+
+[options="header", cols=".^2,.^3,.^9,.^4"]
+|===
+|Type|Name|Description|Schema
+|**Body**|**data** +
+__required__|data:用户名,密码,验证码 必须填写,其他的可以空缺|<<_userregistrybean,UserRegistryBean>>
+|===
+
+
+==== Responses
+
+[options="header", cols=".^2,.^14,.^4"]
+|===
+|HTTP Code|Description|Schema
+|**200**|OK|<<_resultmsg,ResultMsg>>
+|**201**|Created|No Content
+|**401**|Unauthorized|No Content
+|**403**|Forbidden|No Content
+|**404**|Not Found|No Content
+|===
+
+
+==== Consumes
+
+* `application/json`
+
+
+==== Produces
+
+* `application/json;charset=UTF-8`
+
+
+==== Tags
+
+* userAPI
+
+
+==== Example HTTP request
+
+===== Request path
+----
+/seller/user/registry
+----
+
+
+===== Request body
+[source,json]
+----
+{
+  "address" : "string",
+  "birth" : "string",
+  "code" : "string",
+  "email" : "string",
+  "enName" : "string",
+  "loginName" : "string",
+  "password" : "string",
+  "phone" : "string",
+  "sex" : 0,
+  "zhName" : "string"
+}
+----
+
+
+==== Example HTTP response
+
+===== Response 200
+[source,json]
+----
+{
+  "code" : 0,
+  "msg" : "string"
+}
+----
+
+
+[[_updateusingpost_2]]
+=== 更新用户信息
+....
+POST /seller/user/update
+....
+
+
+==== Description
+Header中必须包含Token
+
+
+==== Parameters
+
+[options="header", cols=".^2,.^3,.^9,.^4,.^2"]
+|===
+|Type|Name|Description|Schema|Default
+|**Header**|**Authorization** +
+__required__|Authorization|string|`"UTF-8"`
+|**Header**|**Token** +
+__required__|登录成功时从服务获得的Token|string|
+|**Body**|**data** +
+__required__|data:用户名 必须填写,其他的可以空缺|<<_sysuserbean,SysUserBean>>|
+|===
+
+
+==== Responses
+
+[options="header", cols=".^2,.^14,.^4"]
+|===
+|HTTP Code|Description|Schema
+|**200**|OK|<<_resultmsg,ResultMsg>>
+|**201**|Created|No Content
+|**401**|Unauthorized|No Content
+|**403**|Forbidden|No Content
+|**404**|Not Found|No Content
+|===
+
+
+==== Consumes
+
+* `application/json`
+
+
+==== Produces
+
+* `application/json;charset=UTF-8`
+
+
+==== Tags
+
+* userAPI
+
+
+==== Example HTTP request
+
+===== Request path
+----
+/seller/user/update
+----
+
+
+===== Request header
+[source,json]
+----
+"string"
+----
+
+
+===== Request body
+[source,json]
+----
+{
+  "address" : "string",
+  "birth" : "string",
+  "createBy" : "string",
+  "createTime" : "string",
+  "email" : "string",
+  "enName" : "string",
+  "id" : 0,
+  "loginName" : "string",
+  "organizationId" : 0,
+  "password" : "string",
+  "permissionIds" : [ 0 ],
+  "phone" : "string",
+  "sex" : 0,
+  "updateBy" : "string",
+  "updateTime" : "string",
+  "zhName" : "string"
+}
+----
+
+
+==== Example HTTP response
+
+===== Response 200
+[source,json]
+----
+{
+  "code" : 0,
+  "msg" : "string"
+}
+----
+
+
+[[_userlogoutusingpost]]
+=== 登出
+....
+POST /seller/userLogout
+....
+
+
+==== Description
+密码不需要
+
+
+==== Parameters
+
+[options="header", cols=".^2,.^3,.^9,.^4"]
+|===
+|Type|Name|Description|Schema
+|**Header**|**Token** +
+__required__|登录成功时从服务获得的Token|string
+|**Body**|**username** +
+__required__|body: 用户名|<<_loginbean,LoginBean>>
+|===
+
+
+==== Responses
+
+[options="header", cols=".^2,.^14,.^4"]
+|===
+|HTTP Code|Description|Schema
+|**200**|OK|<<_resultmsg,ResultMsg>>
+|**201**|Created|No Content
+|**401**|Unauthorized|No Content
+|**403**|Forbidden|No Content
+|**404**|Not Found|No Content
+|===
+
+
+==== Consumes
+
+* `application/json`
+
+
+==== Produces
+
+* `application/json;charset=UTF-8`
+
+
+==== Tags
+
+* LoginAPI
+
+
+==== Example HTTP request
+
+===== Request path
+----
+/seller/userLogout
+----
+
+
+===== Request header
+[source,json]
+----
+"string"
+----
+
+
+===== Request body
+[source,json]
+----
+{
+  "code" : "string",
+  "oldPassword" : "string",
+  "password" : "string",
+  "username" : "string"
+}
+----
+
+
+==== Example HTTP response
+
+===== Response 200
+[source,json]
+----
+{
+  "code" : 0,
+  "msg" : "string"
+}
+----
+
+
+
+
+[[_definitions]]
+== Definitions
+
+[[_loginbean]]
+=== LoginBean
+
+[options="header", cols=".^3,.^11,.^4"]
+|===
+|Name|Description|Schema
+|**code** +
+__optional__|**Example** : `"string"`|string
+|**oldPassword** +
+__optional__|**Example** : `"string"`|string
+|**password** +
+__optional__|**Example** : `"string"`|string
+|**username** +
+__optional__|**Example** : `"string"`|string
+|===
+
+
+[[_ad3e145cd313afc49df8daceebca553a]]
+=== PageInfo«SysLogBean»
+
+[options="header", cols=".^3,.^11,.^4"]
+|===
+|Name|Description|Schema
+|**pageSize** +
+__optional__|**Example** : `0`|integer (int32)
+|**rows** +
+__optional__|**Example** : `[ "<<_syslogbean>>" ]`|< <<_syslogbean,SysLogBean>> > array
+|**total** +
+__optional__|**Example** : `0`|integer (int32)
+|===
+
+
+[[_ebdc607c2538ad5e0630170efdcff218]]
+=== PageInfo«SysOrganizationListBean»
+
+[options="header", cols=".^3,.^11,.^4"]
+|===
+|Name|Description|Schema
+|**pageSize** +
+__optional__|**Example** : `0`|integer (int32)
+|**rows** +
+__optional__|**Example** : `[ "<<_sysorganizationlistbean>>" ]`|< <<_sysorganizationlistbean,SysOrganizationListBean>> > array
+|**total** +
+__optional__|**Example** : `0`|integer (int32)
+|===
+
+
+[[_393a1833bbce4a3857302bd6f0312404]]
+=== PageInfo«SysOrganizationTree»
+
+[options="header", cols=".^3,.^11,.^4"]
+|===
+|Name|Description|Schema
+|**pageSize** +
+__optional__|**Example** : `0`|integer (int32)
+|**rows** +
+__optional__|**Example** : `[ "<<_sysorganizationtree>>" ]`|< <<_sysorganizationtree,SysOrganizationTree>> > array
+|**total** +
+__optional__|**Example** : `0`|integer (int32)
+|===
+
+
+[[_8ba3fca8a8d804c8c20b32f515e6435a]]
+=== PageInfo«SysPermissionBean»
+
+[options="header", cols=".^3,.^11,.^4"]
+|===
+|Name|Description|Schema
+|**pageSize** +
+__optional__|**Example** : `0`|integer (int32)
+|**rows** +
+__optional__|**Example** : `[ "<<_syspermissionbean>>" ]`|< <<_syspermissionbean,SysPermissionBean>> > array
+|**total** +
+__optional__|**Example** : `0`|integer (int32)
+|===
+
+
+[[_8e7271787efaab996c12870a42f382f1]]
+=== PageInfo«SysRoleBean»
+
+[options="header", cols=".^3,.^11,.^4"]
+|===
+|Name|Description|Schema
+|**pageSize** +
+__optional__|**Example** : `0`|integer (int32)
+|**rows** +
+__optional__|**Example** : `[ "<<_sysrolebean>>" ]`|< <<_sysrolebean,SysRoleBean>> > array
+|**total** +
+__optional__|**Example** : `0`|integer (int32)
+|===
+
+
+[[_6694c35a89d68a9a0b988265e275aa48]]
+=== PageInfo«SysUserBean»
+
+[options="header", cols=".^3,.^11,.^4"]
+|===
+|Name|Description|Schema
+|**pageSize** +
+__optional__|**Example** : `0`|integer (int32)
+|**rows** +
+__optional__|**Example** : `[ "<<_sysuserbean>>" ]`|< <<_sysuserbean,SysUserBean>> > array
+|**total** +
+__optional__|**Example** : `0`|integer (int32)
+|===
+
+
+[[_e6856ecfa5abc54d7bee7e3ce2232e53]]
+=== PageRequestBean«SysLogBean»
+
+[options="header", cols=".^3,.^11,.^4"]
+|===
+|Name|Description|Schema
+|**data** +
+__optional__|**Example** : `"<<_syslogbean>>"`|<<_syslogbean,SysLogBean>>
+|**pageIndex** +
+__optional__|**Example** : `0`|integer (int32)
+|**pageSize** +
+__optional__|**Example** : `0`|integer (int32)
+|===
+
+
+[[_be3e0cc2329862b2afcc8f35f3879c56]]
+=== PageRequestBean«SysOrganizationListBean»
+
+[options="header", cols=".^3,.^11,.^4"]
+|===
+|Name|Description|Schema
+|**data** +
+__optional__|**Example** : `"<<_sysorganizationlistbean>>"`|<<_sysorganizationlistbean,SysOrganizationListBean>>
+|**pageIndex** +
+__optional__|**Example** : `0`|integer (int32)
+|**pageSize** +
+__optional__|**Example** : `0`|integer (int32)
+|===
+
+
+[[_328f1e9780ac983be9064f640973092e]]
+=== PageRequestBean«SysPermissionBean»
+
+[options="header", cols=".^3,.^11,.^4"]
+|===
+|Name|Description|Schema
+|**data** +
+__optional__|**Example** : `"<<_syspermissionbean>>"`|<<_syspermissionbean,SysPermissionBean>>
+|**pageIndex** +
+__optional__|**Example** : `0`|integer (int32)
+|**pageSize** +
+__optional__|**Example** : `0`|integer (int32)
+|===
+
+
+[[_3a44fce9b457f29115373b19a379b098]]
+=== PageRequestBean«SysUserBean»
+
+[options="header", cols=".^3,.^11,.^4"]
+|===
+|Name|Description|Schema
+|**data** +
+__optional__|**Example** : `"<<_sysuserbean>>"`|<<_sysuserbean,SysUserBean>>
+|**pageIndex** +
+__optional__|**Example** : `0`|integer (int32)
+|**pageSize** +
+__optional__|**Example** : `0`|integer (int32)
+|===
+
+
+[[_resultmsg]]
+=== ResultMsg
+
+[options="header", cols=".^3,.^11,.^4"]
+|===
+|Name|Description|Schema
+|**code** +
+__optional__|**Example** : `0`|integer (int32)
+|**msg** +
+__optional__|**Example** : `"string"`|string
+|===
+
+
+[[_dfff023e198e2fc468961596c545e450]]
+=== ResultObject«ArrayList«SysPermissionBean»»
+
+[options="header", cols=".^3,.^11,.^4"]
+|===
+|Name|Description|Schema
+|**code** +
+__optional__|**Example** : `0`|integer (int32)
+|**data** +
+__optional__|**Example** : `[ "<<_syspermissionbean>>" ]`|< <<_syspermissionbean,SysPermissionBean>> > array
+|**msg** +
+__optional__|**Example** : `"string"`|string
+|===
+
+
+[[_409c8989ccf07affdea46f453d4bcdf4]]
+=== ResultObject«ArrayList«SysPermissionGroupBean»»
+
+[options="header", cols=".^3,.^11,.^4"]
+|===
+|Name|Description|Schema
+|**code** +
+__optional__|**Example** : `0`|integer (int32)
+|**data** +
+__optional__|**Example** : `[ "<<_syspermissiongroupbean>>" ]`|< <<_syspermissiongroupbean,SysPermissionGroupBean>> > array
+|**msg** +
+__optional__|**Example** : `"string"`|string
+|===
+
+
+[[_afab1f1e9b9df8cb28b23858d94012bf]]
+=== ResultObject«List«SysOrganizationListBean»»
+
+[options="header", cols=".^3,.^11,.^4"]
+|===
+|Name|Description|Schema
+|**code** +
+__optional__|**Example** : `0`|integer (int32)
+|**data** +
+__optional__|**Example** : `[ "<<_sysorganizationlistbean>>" ]`|< <<_sysorganizationlistbean,SysOrganizationListBean>> > array
+|**msg** +
+__optional__|**Example** : `"string"`|string
+|===
+
+
+[[_102eb6bca4845172d09d75b432dc5aa4]]
+=== ResultObject«List«SysOrganizationTree»»
+
+[options="header", cols=".^3,.^11,.^4"]
+|===
+|Name|Description|Schema
+|**code** +
+__optional__|**Example** : `0`|integer (int32)
+|**data** +
+__optional__|**Example** : `[ "<<_sysorganizationtree>>" ]`|< <<_sysorganizationtree,SysOrganizationTree>> > array
+|**msg** +
+__optional__|**Example** : `"string"`|string
+|===
+
+
+[[_46cbc736aa489bc075afecd80aa278e9]]
+=== ResultObject«List«SysRoleBean»»
+
+[options="header", cols=".^3,.^11,.^4"]
+|===
+|Name|Description|Schema
+|**code** +
+__optional__|**Example** : `0`|integer (int32)
+|**data** +
+__optional__|**Example** : `[ "<<_sysrolebean>>" ]`|< <<_sysrolebean,SysRoleBean>> > array
+|**msg** +
+__optional__|**Example** : `"string"`|string
+|===
+
+
+[[_3eee6dbe4c445109d8b7aa532b4efd90]]
+=== ResultObject«List«UserRolePermissionBean»»
+
+[options="header", cols=".^3,.^11,.^4"]
+|===
+|Name|Description|Schema
+|**code** +
+__optional__|**Example** : `0`|integer (int32)
+|**data** +
+__optional__|**Example** : `[ "<<_userrolepermissionbean>>" ]`|< <<_userrolepermissionbean,UserRolePermissionBean>> > array
+|**msg** +
+__optional__|**Example** : `"string"`|string
+|===
+
+
+[[_84aa9dcc84a167074b98b5502a68bbb4]]
+=== ResultObject«List«long»»
+
+[options="header", cols=".^3,.^11,.^4"]
+|===
+|Name|Description|Schema
+|**code** +
+__optional__|**Example** : `0`|integer (int32)
+|**data** +
+__optional__|**Example** : `[ 0 ]`|< integer (int64) > array
+|**msg** +
+__optional__|**Example** : `"string"`|string
+|===
+
+
+[[_fd1070d690a733ef6ff41716ac70fddd]]
+=== ResultObject«PageInfo«SysLogBean»»
+
+[options="header", cols=".^3,.^11,.^4"]
+|===
+|Name|Description|Schema
+|**code** +
+__optional__|**Example** : `0`|integer (int32)
+|**data** +
+__optional__|**Example** : `"<<_ad3e145cd313afc49df8daceebca553a>>"`|<<_ad3e145cd313afc49df8daceebca553a,PageInfo«SysLogBean»>>
+|**msg** +
+__optional__|**Example** : `"string"`|string
+|===
+
+
+[[_c6105361b3991475d61b6b41e1e8a3aa]]
+=== ResultObject«PageInfo«SysOrganizationListBean»»
+
+[options="header", cols=".^3,.^11,.^4"]
+|===
+|Name|Description|Schema
+|**code** +
+__optional__|**Example** : `0`|integer (int32)
+|**data** +
+__optional__|**Example** : `"<<_ebdc607c2538ad5e0630170efdcff218>>"`|<<_ebdc607c2538ad5e0630170efdcff218,PageInfo«SysOrganizationListBean»>>
+|**msg** +
+__optional__|**Example** : `"string"`|string
+|===
+
+
+[[_72c21cfae45dca916ac9e5ac2418a870]]
+=== ResultObject«PageInfo«SysOrganizationTree»»
+
+[options="header", cols=".^3,.^11,.^4"]
+|===
+|Name|Description|Schema
+|**code** +
+__optional__|**Example** : `0`|integer (int32)
+|**data** +
+__optional__|**Example** : `"<<_393a1833bbce4a3857302bd6f0312404>>"`|<<_393a1833bbce4a3857302bd6f0312404,PageInfo«SysOrganizationTree»>>
+|**msg** +
+__optional__|**Example** : `"string"`|string
+|===
+
+
+[[_c9d7fef2dc8043d5cb9b285ca1a17b42]]
+=== ResultObject«PageInfo«SysPermissionBean»»
+
+[options="header", cols=".^3,.^11,.^4"]
+|===
+|Name|Description|Schema
+|**code** +
+__optional__|**Example** : `0`|integer (int32)
+|**data** +
+__optional__|**Example** : `"<<_8ba3fca8a8d804c8c20b32f515e6435a>>"`|<<_8ba3fca8a8d804c8c20b32f515e6435a,PageInfo«SysPermissionBean»>>
+|**msg** +
+__optional__|**Example** : `"string"`|string
+|===
+
+
+[[_9f70e4a73ec23823e284b284f1c75808]]
+=== ResultObject«PageInfo«SysRoleBean»»
+
+[options="header", cols=".^3,.^11,.^4"]
+|===
+|Name|Description|Schema
+|**code** +
+__optional__|**Example** : `0`|integer (int32)
+|**data** +
+__optional__|**Example** : `"<<_8e7271787efaab996c12870a42f382f1>>"`|<<_8e7271787efaab996c12870a42f382f1,PageInfo«SysRoleBean»>>
+|**msg** +
+__optional__|**Example** : `"string"`|string
+|===
+
+
+[[_2ffa1fefc2924b40c62fbfb4f6076f3a]]
+=== ResultObject«PageInfo«SysUserBean»»
+
+[options="header", cols=".^3,.^11,.^4"]
+|===
+|Name|Description|Schema
+|**code** +
+__optional__|**Example** : `0`|integer (int32)
+|**data** +
+__optional__|**Example** : `"<<_6694c35a89d68a9a0b988265e275aa48>>"`|<<_6694c35a89d68a9a0b988265e275aa48,PageInfo«SysUserBean»>>
+|**msg** +
+__optional__|**Example** : `"string"`|string
+|===
+
+
+[[_a3521d80014e1921c3bd0076bbdbf081]]
+=== ResultObject«SysOrganizationTree»
+
+[options="header", cols=".^3,.^11,.^4"]
+|===
+|Name|Description|Schema
+|**code** +
+__optional__|**Example** : `0`|integer (int32)
+|**data** +
+__optional__|**Example** : `"<<_sysorganizationtree>>"`|<<_sysorganizationtree,SysOrganizationTree>>
+|**msg** +
+__optional__|**Example** : `"string"`|string
+|===
+
+
+[[_84c97940e7fa3691d50dda714ec053f9]]
+=== ResultObject«SysRoleBean»
+
+[options="header", cols=".^3,.^11,.^4"]
+|===
+|Name|Description|Schema
+|**code** +
+__optional__|**Example** : `0`|integer (int32)
+|**data** +
+__optional__|**Example** : `"<<_sysrolebean>>"`|<<_sysrolebean,SysRoleBean>>
+|**msg** +
+__optional__|**Example** : `"string"`|string
+|===
+
+
+[[_f1ae6dc707baa0aeea21d66ca14d4a26]]
+=== ResultObject«SysUserBean»
+
+[options="header", cols=".^3,.^11,.^4"]
+|===
+|Name|Description|Schema
+|**code** +
+__optional__|**Example** : `0`|integer (int32)
+|**data** +
+__optional__|**Example** : `"<<_sysuserbean>>"`|<<_sysuserbean,SysUserBean>>
+|**msg** +
+__optional__|**Example** : `"string"`|string
+|===
+
+
+[[_syslogbean]]
+=== SysLogBean
+
+[options="header", cols=".^3,.^11,.^4"]
+|===
+|Name|Description|Schema
+|**createTimeEnd** +
+__optional__|**Example** : `"string"`|string
+|**createTimeStart** +
+__optional__|**Example** : `"string"`|string
+|**id** +
+__optional__|**Example** : `0`|integer (int64)
+|**idList** +
+__optional__|**Example** : `[ 0 ]`|< integer (int64) > array
+|**ip** +
+__optional__|**Example** : `"string"`|string
+|**method** +
+__optional__|**Example** : `"string"`|string
+|**param** +
+__optional__|**Example** : `"string"`|string
+|**result** +
+__optional__|**Example** : `"string"`|string
+|**timeUsed** +
+__optional__|**Example** : `"string"`|string
+|**url** +
+__optional__|**Example** : `"string"`|string
+|**user** +
+__optional__|**Example** : `"string"`|string
+|**userAgent** +
+__optional__|**Example** : `"string"`|string
+|===
+
+
+[[_sysorganizationlistbean]]
+=== SysOrganizationListBean
+
+[options="header", cols=".^3,.^11,.^4"]
+|===
+|Name|Description|Schema
+|**description** +
+__optional__|**Example** : `"string"`|string
+|**fullName** +
+__optional__|**Example** : `"string"`|string
+|**id** +
+__optional__|**Example** : `0`|integer (int64)
+|**isFinal** +
+__optional__|**Example** : `0`|integer (int32)
+|**name** +
+__optional__|**Example** : `"string"`|string
+|**parentId** +
+__optional__|**Example** : `0`|integer (int64)
+|**rank** +
+__optional__|**Example** : `0`|integer (int64)
+|**roleIds** +
+__optional__|**Example** : `[ 0 ]`|< integer (int64) > array
+|**roles** +
+__optional__|**Example** : `"string"`|string
+|===
+
+
+[[_sysorganizationtree]]
+=== SysOrganizationTree
+
+[options="header", cols=".^3,.^11,.^4"]
+|===
+|Name|Description|Schema
+|**children** +
+__optional__|**Example** : `[ "<<_sysorganizationtree>>" ]`|< <<_sysorganizationtree,SysOrganizationTree>> > array
+|**createBy** +
+__optional__|**Example** : `0`|integer (int64)
+|**createTime** +
+__optional__|**Example** : `"string"`|string (date-time)
+|**description** +
+__optional__|**Example** : `"string"`|string
+|**fullName** +
+__optional__|**Example** : `"string"`|string
+|**id** +
+__optional__|**Example** : `0`|integer (int64)
+|**isFinal** +
+__optional__|**Example** : `0`|integer (int32)
+|**name** +
+__optional__|**Example** : `"string"`|string
+|**parentId** +
+__optional__|**Example** : `0`|integer (int64)
+|**rank** +
+__optional__|**Example** : `0`|integer (int64)
+|**status** +
+__optional__|**Example** : `0`|integer (int32)
+|**updateBy** +
+__optional__|**Example** : `0`|integer (int64)
+|**updateTime** +
+__optional__|**Example** : `"string"`|string (date-time)
+|===
+
+
+[[_syspermissionbean]]
+=== SysPermissionBean
+
+[options="header", cols=".^3,.^11,.^4"]
+|===
+|Name|Description|Schema
+|**code** +
+__optional__|**Example** : `"string"`|string
+|**description** +
+__optional__|**Example** : `"string"`|string
+|**id** +
+__optional__|**Example** : `0`|integer (int64)
+|**isFinal** +
+__optional__|**Example** : `0`|integer (int32)
+|**name** +
+__optional__|**Example** : `"string"`|string
+|**rank** +
+__optional__|**Example** : `0`|integer (int64)
+|**status** +
+__optional__|**Example** : `0`|integer (int32)
+|**sysPermissionGroupId** +
+__optional__|**Example** : `0`|integer (int64)
+|===
+
+
+[[_syspermissiongroupbean]]
+=== SysPermissionGroupBean
+
+[options="header", cols=".^3,.^11,.^4"]
+|===
+|Name|Description|Schema
+|**code** +
+__optional__|**Example** : `"string"`|string
+|**description** +
+__optional__|**Example** : `"string"`|string
+|**id** +
+__optional__|**Example** : `0`|integer (int64)
+|**isFinal** +
+__optional__|**Example** : `0`|integer (int32)
+|**name** +
+__optional__|**Example** : `"string"`|string
+|===
+
+
+[[_sysrolebean]]
+=== SysRoleBean
+
+[options="header", cols=".^3,.^11,.^4"]
+|===
+|Name|Description|Schema
+|**createBy** +
+__optional__|**Example** : `0`|integer (int64)
+|**createTime** +
+__optional__|**Example** : `"string"`|string (date-time)
+|**description** +
+__optional__|**Example** : `"string"`|string
+|**id** +
+__optional__|**Example** : `0`|integer (int64)
+|**isFinal** +
+__optional__|**Example** : `0`|integer (int32)
+|**name** +
+__optional__|**Example** : `"string"`|string
+|**organizationId** +
+__optional__|**Example** : `[ 0 ]`|< integer (int64) > array
+|**rank** +
+__optional__|**Example** : `0`|integer (int64)
+|**status** +
+__optional__|**Example** : `0`|integer (int32)
+|**sysPermissionIds** +
+__optional__|**Example** : `[ 0 ]`|< integer (int64) > array
+|**updateBy** +
+__optional__|**Example** : `0`|integer (int64)
+|**updateTime** +
+__optional__|**Example** : `"string"`|string (date-time)
+|===
+
+
+[[_sysuserbean]]
+=== SysUserBean
+
+[options="header", cols=".^3,.^11,.^4"]
+|===
+|Name|Description|Schema
+|**address** +
+__optional__|**Example** : `"string"`|string
+|**birth** +
+__optional__|**Example** : `"string"`|string
+|**createBy** +
+__optional__|**Example** : `"string"`|string
+|**createTime** +
+__optional__|**Example** : `"string"`|string
+|**email** +
+__optional__|**Example** : `"string"`|string
+|**enName** +
+__optional__|**Example** : `"string"`|string
+|**id** +
+__optional__|**Example** : `0`|integer (int64)
+|**loginName** +
+__optional__|**Example** : `"string"`|string
+|**organizationId** +
+__optional__|**Example** : `0`|integer (int64)
+|**password** +
+__optional__|**Example** : `"string"`|string
+|**permissionIds** +
+__optional__|**Example** : `[ 0 ]`|< integer (int64) > array
+|**phone** +
+__optional__|**Example** : `"string"`|string
+|**sex** +
+__optional__|**Example** : `0`|integer (int32)
+|**updateBy** +
+__optional__|**Example** : `"string"`|string
+|**updateTime** +
+__optional__|**Example** : `"string"`|string
+|**zhName** +
+__optional__|**Example** : `"string"`|string
+|===
+
+
+[[_sysuserpermissionbean]]
+=== SysUserPermissionBean
+
+[options="header", cols=".^3,.^11,.^4"]
+|===
+|Name|Description|Schema
+|**rolePermissionIds** +
+__optional__|**Example** : `[ 0 ]`|< integer (int64) > array
+|**sysUserId** +
+__optional__|**Example** : `0`|integer (int64)
+|===
+
+
+[[_sysusersearchbean]]
+=== SysUserSearchBean
+
+[options="header", cols=".^3,.^11,.^4"]
+|===
+|Name|Description|Schema
+|**address** +
+__optional__|**Example** : `"string"`|string
+|**birth** +
+__optional__|**Example** : `"string"`|string
+|**code** +
+__optional__|**Example** : `"string"`|string
+|**createBy** +
+__optional__|**Example** : `"string"`|string
+|**createTimeEnd** +
+__optional__|**Example** : `"string"`|string
+|**createTimeStart** +
+__optional__|**Example** : `"string"`|string
+|**email** +
+__optional__|**Example** : `"string"`|string
+|**enName** +
+__optional__|**Example** : `"string"`|string
+|**loginName** +
+__optional__|**Example** : `"string"`|string
+|**pageIndex** +
+__optional__|**Example** : `0`|integer (int32)
+|**pageSize** +
+__optional__|**Example** : `0`|integer (int32)
+|**password** +
+__optional__|**Example** : `"string"`|string
+|**phone** +
+__optional__|**Example** : `"string"`|string
+|**sex** +
+__optional__|**Example** : `0`|integer (int32)
+|**updateBy** +
+__optional__|**Example** : `"string"`|string
+|**updateTimeEnd** +
+__optional__|**Example** : `"string"`|string
+|**updateTimeStart** +
+__optional__|**Example** : `"string"`|string
+|**zhName** +
+__optional__|**Example** : `"string"`|string
+|===
+
+
+[[_userregistrybean]]
+=== UserRegistryBean
+
+[options="header", cols=".^3,.^11,.^4"]
+|===
+|Name|Description|Schema
+|**address** +
+__optional__|**Example** : `"string"`|string
+|**birth** +
+__optional__|**Example** : `"string"`|string
+|**code** +
+__optional__|**Example** : `"string"`|string
+|**email** +
+__optional__|**Example** : `"string"`|string
+|**enName** +
+__optional__|**Example** : `"string"`|string
+|**loginName** +
+__optional__|**Example** : `"string"`|string
+|**password** +
+__optional__|**Example** : `"string"`|string
+|**phone** +
+__optional__|**Example** : `"string"`|string
+|**sex** +
+__optional__|**Example** : `0`|integer (int32)
+|**zhName** +
+__optional__|**Example** : `"string"`|string
+|===
+
+
+[[_userrolepermissionbean]]
+=== UserRolePermissionBean
+
+[options="header", cols=".^3,.^11,.^4"]
+|===
+|Name|Description|Schema
+|**description** +
+__optional__|**Example** : `"string"`|string
+|**id** +
+__optional__|**Example** : `0`|integer (int64)
+|**isFinal** +
+__optional__|**Example** : `0`|integer (int32)
+|**name** +
+__optional__|**Example** : `"string"`|string
+|**permissionCodes** +
+__optional__|**Example** : `[ "string" ]`|< string > array
+|**permissionGroups** +
+__optional__|**Example** : `[ 0 ]`|< integer (int64) > array
+|**rank** +
+__optional__|**Example** : `0`|integer (int64)
+|===
+
+
+
+
+

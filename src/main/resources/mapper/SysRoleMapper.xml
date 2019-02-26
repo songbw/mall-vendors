@@ -1,0 +1,281 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.software.seller.mapper.SysRoleMapper">
+    <resultMap id="baseResultMap" type="com.software.seller.model.SysRole">
+        <result column="id" property="id" jdbcType="BIGINT"/>
+        <result column="description" property="description" jdbcType="VARCHAR"/>
+        <result column="name" property="name" jdbcType="VARCHAR"/>
+        <result column="rank" property="rank" jdbcType="BIGINT"/>
+        <result column="is_final" property="isFinal" jdbcType="INTEGER"/>
+        <result column="create_time" property="createTime" jdbcType="TIMESTAMP"/>
+        <result column="update_time" property="updateTime" jdbcType="TIMESTAMP"/>
+        <result column="create_by" property="createBy" jdbcType="BIGINT"/>
+        <result column="update_by" property="updateBy" jdbcType="BIGINT"/>
+        <result column="status" property="status" jdbcType="TINYINT"/>
+    </resultMap>
+    <!--  -->
+    <sql id="sql_column">
+        id,
+        description,
+        name,
+        rank,
+        isFinal,
+        createTime,
+        updateTime,
+        createBy,
+        updateBy,
+        status
+    </sql>
+
+    <sql id="sql_column_where">
+        <if test="id !=null ">
+            AND id = #{id}
+        </if>
+        <if test="description !=null and description.length() != 0">
+            AND description = #{description}
+        </if>
+        <if test="name !=null and name.length() != 0">
+            AND name = #{name}
+        </if>
+        <if test="rank !=null ">
+            AND rank = #{rank}
+        </if>
+        <if test="isFinal !=null ">
+            AND is_final = #{isFinal}
+        </if>
+        <if test="createTime !=null ">
+            AND create_time = #{createTime}
+        </if>
+        <if test="updateTime !=null ">
+            AND update_time = #{updateTime}
+        </if>
+        <if test="createBy !=null ">
+            AND create_by = #{createBy}
+        </if>
+        <if test="updateBy !=null ">
+            AND update_by = #{updateBy}
+        </if>
+        <if test="status !=null ">
+            AND status = #{status}
+        </if>
+    </sql>
+
+    <insert id="insert" parameterType="SysRole" useGeneratedKeys="true" keyProperty="id">
+        insert into sys_role
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="description !=null and description.length() !=0">
+                description,
+            </if>
+            <if test="name !=null and name.length() !=0">
+                name,
+            </if>
+            <if test="rank !=null">
+                rank,
+            </if>
+            <if test="isFinal !=null">
+                is_final,
+            </if>
+            <if test="createTime !=null">
+                create_time,
+            </if>
+            <if test="updateTime !=null">
+                update_time,
+            </if>
+            <if test="createBy !=null">
+                create_by,
+            </if>
+            <if test="updateBy !=null">
+                update_by,
+            </if>
+            <if test="status !=null">
+                status,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="description !=null and description.length() !=0">
+                #{description},
+            </if>
+            <if test="name !=null and name.length() !=0">
+                #{name},
+            </if>
+            <if test="rank !=null">
+                #{rank},
+            </if>
+            <if test="isFinal !=null">
+                #{isFinal},
+            </if>
+            <if test="createTime !=null">
+                #{createTime},
+            </if>
+            <if test="updateTime !=null">
+                #{updateTime},
+            </if>
+            <if test="createBy !=null">
+                #{createBy},
+            </if>
+            <if test="updateBy !=null">
+                #{updateBy},
+            </if>
+            <if test="status !=null">
+                #{status},
+            </if>
+        </trim>
+    </insert>
+
+
+    <update id="update" parameterType="SysRole">
+        update sys_role
+        <set>
+            <if test="id !=null">
+                id = #{id},
+            </if>
+            <if test="description !=null and description.length() !=0">
+                description = #{description},
+            </if>
+            <if test="name !=null and name.length() !=0">
+                name = #{name},
+            </if>
+            <if test="rank !=null">
+                rank = #{rank},
+            </if>
+            <if test="isFinal !=null">
+                is_final = #{isFinal},
+            </if>
+            <if test="createTime !=null">
+                create_time = #{createTime},
+            </if>
+            <if test="updateTime !=null">
+                update_time = #{updateTime},
+            </if>
+            <if test="createBy !=null">
+                create_by = #{createBy},
+            </if>
+            <if test="updateBy !=null">
+                update_by = #{updateBy},
+            </if>
+            <if test="status !=null">
+                status = #{status},
+            </if>
+        </set>
+        where id =#{id} and status=1
+    </update>
+
+    <update id="deleteById" parameterType="java.lang.Long">
+        update sys_role
+        <set>
+                status = 2,
+        </set>
+        where id =#{id} and status=1
+    </update>
+
+    <select id="select" parameterType="SysRole" resultMap="baseResultMap">
+        select * from sys_role where
+        <where>
+            <include refid="sql_column_where"/>
+        </where>
+    </select>
+
+    <select id="selectById" parameterType="long" resultMap="baseResultMap">
+        SELECT *
+        FROM sys_role
+        WHERE id = #{id} AND status = 1
+    </select>
+    <select id="selectNameByUserId" parameterType="long" resultType="java.lang.String">
+        SELECT name
+        FROM sys_role
+        WHERE status = 1 AND id in(
+          SELECT sys_role_id
+          FROM sys_role_organization
+          WHERE status = 1 AND sys_organization_id in (
+            SELECT sys_role_organization_id
+            FROM sys_user_role_organization
+            WHERE sys_user_id = #{id} AND status = 1
+        )
+
+        )
+    </select>
+    <select id="selectByOrgId" resultMap="baseResultMap">
+        SELECT *
+        FROM sys_role
+        WHERE status = 1 AND id in(
+        SELECT sys_role_id
+        FROM sys_role_organization
+        WHERE status = 1 AND sys_organization_id in
+        <foreach collection="orgIds" item="orgId"
+                 index="index" open="(" close=")" separator=",">
+            #{orgId}
+          </foreach>
+        )
+    </select>
+
+    <select id="selectAllSpecial" resultMap="baseResultMap">
+        SELECT *
+        FROM sys_role
+        WHERE status = 1
+        <if test="description !=null and description.length() !=0">
+            AND description  LIKE concat('%', #{description},'%')
+        </if>
+        <if test="name !=null and name.length() !=0">
+            AND name LIKE concat('%', #{name},'%')
+        </if>
+        <if test="groupIds.size() != 0 or permissionCodes !=null">
+            AND id IN (
+              SELECT sys_role_id
+              FROM sys_role_permission
+              WHERE status = 1
+                AND sys_permission_id IN (
+                SELECT id
+                FROM sys_permission
+                WHERE status = 1
+                  <if test="permissionCodes.size() != 0">
+                    AND code IN
+                      <foreach collection="permissionCodes" item="permissionCode"
+                         index="index" open="(" close=")" separator=",">
+                          #{permissionCode}
+                      </foreach>
+                  </if>
+                  <if test="groupIds.size() != 0">
+                    AND sys_permission_group_id IN
+                      <foreach collection="groupIds" item="groupId"
+                             index="index" open="(" close=")" separator=",">
+                        #{groupId}
+                    </foreach>
+                  </if>
+              )
+            )
+        </if>
+
+    </select>
+
+    <select id="selectAll" resultMap="baseResultMap">
+        SELECT *
+        FROM sys_role
+        WHERE status = 1
+    </select>
+
+    <select id="selectCounts" resultType="integer">
+        SELECT count(*)
+        FROM sys_role
+        WHERE status = 1
+    </select>
+    <select id="isExsitName" resultType="java.lang.Boolean">
+        SELECT exists(
+                SELECT *
+                FROM sys_role
+                WHERE status = 1 AND name = #{name}
+        )
+    </select>
+    <select id="isExsitNameExcludeId" resultType="java.lang.Boolean">
+        SELECT exists(
+                SELECT *
+                FROM sys_role
+                WHERE status = 1 AND id != #{id} AND name = #{name}
+        )
+    </select>
+    <delete id="shrink">
+        DELETE
+        FROM sys_role
+        WHERE
+        status = 2
+    </delete>
+</mapper>
