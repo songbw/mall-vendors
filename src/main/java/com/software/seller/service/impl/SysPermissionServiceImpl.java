@@ -125,6 +125,16 @@ public class SysPermissionServiceImpl implements ISysPermissionService {
     }
 
     @Override
+    public boolean isExistGroupCode(String code) {
+        return sysPermissionGroupMapper.isExistGroupCode(code);
+    }
+
+    @Override
+    public boolean isExistPermissionUseGroupCode(String code) {
+        return sysPermissionMapper.isExistGroupCode(code);
+    }
+
+    @Override
     public long insertPermissionGroup(SysPermissionGroup sysPermissionGroup) {
 
         return sysPermissionGroupMapper.insert(sysPermissionGroup);

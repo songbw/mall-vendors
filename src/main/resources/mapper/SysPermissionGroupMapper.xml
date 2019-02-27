@@ -71,6 +71,9 @@
             <if test="name !=null and name.length() !=0">
                 name,
             </if>
+            <if test="code !=null and code.length() !=0">
+                code,
+            </if>
             <if test="description !=null and description.length() !=0">
                 description,
             </if>
@@ -102,6 +105,9 @@
         <trim prefix="values (" suffix=")" suffixOverrides=",">
             <if test="name !=null and name.length() !=0">
                 #{name},
+            </if>
+            <if test="code !=null and code.length() !=0">
+                #{code},
             </if>
             <if test="description !=null and description.length() !=0">
                 #{description},
@@ -205,9 +211,16 @@
     </select>
     <select id="isExistGroupName" resultType="java.lang.Boolean">
         SELECT exists(
-                SELECT *
+                SELECT id
                 FROM sys_permission_group
                 WHERE status = 1 AND name = #{name}
+        )
+    </select>
+    <select id="isExistGroupCode" resultType="java.lang.Boolean">
+        SELECT exists(
+                SELECT id
+                FROM sys_permission_group
+                WHERE status = 1 AND code = #{code}
         )
     </select>
     <delete id="shrink">

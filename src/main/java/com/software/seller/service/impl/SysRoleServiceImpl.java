@@ -272,7 +272,7 @@ public class SysRoleServiceImpl implements ISysRoleService {
     @Override
     public List<SysRoleBean> selectByOrgIds(List<Long> orgIds) {
         List<SysRoleBean> beans = new ArrayList<>();
-        if (null ==orgIds ) {
+        if (null == orgIds || 0 >= orgIds.size() ) {
             return beans;
         }
 

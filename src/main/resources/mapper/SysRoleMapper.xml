@@ -201,7 +201,7 @@
         SELECT sys_role_id
         FROM sys_role_organization
         WHERE status = 1 AND sys_organization_id in
-        <foreach collection="orgIds" item="orgId"
+          <foreach collection="orgIds" item="orgId"
                  index="index" open="(" close=")" separator=",">
             #{orgId}
           </foreach>

@@ -7,7 +7,6 @@ import com.software.seller.mapper.SysPermissionGroupMapper;
 import com.software.seller.model.SysPermissionGroup;
 import com.software.seller.service.impl.SysPermissionServiceImpl;
 import com.software.seller.model.SysPermission;
-import com.software.seller.model.SysUser;
 import com.software.seller.service.impl.SysUserServiceImpl;
 import com.software.seller.util.*;
 import io.swagger.annotations.*;
@@ -15,17 +14,13 @@ import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.security.access.prepost.PreAuthorize;
-import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.bind.annotation.RequestHeader;
 
-//import java.text.ParseException;
+import java.lang.NullPointerException;
 import java.util.ArrayList;
 import java.util.Date;
-//import java.util.ArrayList;
-//import java.util.HashMap;
 import java.util.List;
-//import java.util.Map;
 
 @Api(tags="PermissionAPI", description = "用户权限相关", produces = "application/json;charset=UTF-8")
 @RestController
@@ -59,8 +54,6 @@ public class PermissionController {
         data.normalize();
         ResultMsg result = new ResultMsg();
         SysPermission sysPermission = new SysPermission();
-
-        String username = null;
         long userId = sysUserService.getUserIdInToken(authentication);
         String name = data.getName();
         String code = data.getCode();
@@ -75,12 +68,11 @@ public class PermissionController {
 
         SysPermissionGroup permissionGroup = sysPermissionGroupMapper.selectById(permissionGroupId);
         if (null != permissionGroup) {
-            String finalCode = permissionGroup.getCode() + ":" + code;
-            code = finalCode;
+            code = permissionGroup.getCode() + ":" + code;
         }
         sysPermission.setCode(code);
 
-        if (sysPermissionService.isExistCode(permissionGroupId, code) ||
+        if (sysPermissionService.isExistName(permissionGroupId, name) ||
                 sysPermissionService.isExistCode(permissionGroupId, code)) {
             result.setCode(300000);
             result.setMsg("权限已经存在");
@@ -143,7 +135,6 @@ public class PermissionController {
         SysPermission sysPermission;
         SysPermissionGroup permissionGroup = null;
         Long permissionGroupId = data.getSysPermissionGroupId();
-        String username = null;
         String code = data.getCode();
         long userId = sysUserService.getUserIdInToken(authentication);
         if (null == data.getId()) {
@@ -288,6 +279,7 @@ public class PermissionController {
                 groupBean.setId(group.getId());
                 groupBean.setName(group.getName());
                 groupBean.setDescription(group.getDescription());
+                groupBean.setCode(group.getCode());
                 permissionGroups.add(groupBean);
             }
         }
@@ -307,6 +299,28 @@ public class PermissionController {
 
         data.normalize();
         ResultMsg result = new ResultMsg();
+        long groupId = data.getId();
+        String groupCode = data.getCode();
+
+        if (groupCode.isEmpty() || !sysPermissionService.isExistGroupCode(groupCode)) {
+            result.setCode(300000);
+            result.setMsg("wrong group code");
+            return result;
+        }
+
+        List<SysPermission> p = sysPermissionService.selectByGroupId(groupId);
+        try {
+            if (0 < p.size() || sysPermissionService.isExistPermissionUseGroupCode(groupCode)) {
+                System.out.println("==: " + p);
+                result.setCode(300000);
+                result.setMsg("there is permission belong to this group!");
+                return result;
+            }
+        } catch (NullPointerException ex) {
+            result.setCode(300000);
+            result.setMsg("wrong group");
+            return result;
+        }
 
         if (sysPermissionService.deleteGroupById(data.getId())) {
             result.setCode(200);
@@ -323,7 +337,7 @@ public class PermissionController {
     })
     @PostMapping("/group/insert")
     @PreAuthorize("hasPermission('permission','insert')")
-    public ResultMsg insertGroup(@RequestHeader(value="Authorization",defaultValue="UTF-8") Authentication authentication,
+    public ResultMsg insertGroup(@RequestHeader(value="Authorization",defaultValue="UTF-8") String authentication,
                             @ApiParam(value="data: 名子必须填写,其他的可以空缺",required=true)
                             @RequestBody SysPermissionGroupBean data ) {
 
@@ -331,14 +345,14 @@ public class PermissionController {
         ResultMsg result = new ResultMsg();
         SysPermissionGroup sysPermissionGroup = new SysPermissionGroup();
 
-        String username = null;
-        Long userId = 0L;
+        long userId = sysUserService.getUserIdInToken(authentication);
         String name = data.getName();
         String description = data.getDescription();
+	    String permissionCode = data.getCode();
 
-        if (name.isEmpty()) {
+        if (name.isEmpty() || permissionCode.isEmpty()) {
             result.setCode(300003);
-            result.setMsg("名不能为空");
+            result.setMsg("权限名及代码不能为空");
             return result;
         }
 
@@ -348,17 +362,14 @@ public class PermissionController {
             return result;
         }
 
-        if (null != authentication && null != authentication.getPrincipal()) {
-            username = authentication.getPrincipal().toString();
-        }
-        if (null != username && !username.isEmpty()) {
-            SysUser sysUser = sysUserService.selectByLoginName(username);
-            if (null != sysUser) {
-                userId = sysUser.getId();
-            }
+        if (sysPermissionService.isExistGroupCode(permissionCode)) {
+            result.setCode(300000);
+            result.setMsg("权限组代码已经存在");
+            return result;
         }
 
         sysPermissionGroup.setName(name);
+        sysPermissionGroup.setCode(permissionCode);
         sysPermissionGroup.setDescription(description);
         sysPermissionGroup.setIsFinal(data.getIsFinal());
         sysPermissionGroup.setStatus(1);
@@ -383,16 +394,15 @@ public class PermissionController {
     })
     @PostMapping("/group/update")
     @PreAuthorize("hasPermission('permission','update')")
-    public ResultMsg updateGroupById(@RequestHeader(value="Authorization",defaultValue="UTF-8") Authentication authentication,
+    public ResultMsg updateGroupById(@RequestHeader(value="Authorization",defaultValue="UTF-8") String authentication,
                             @ApiParam(value="data: ID必须填写,其他的可以空缺",required=true)
                             @RequestBody SysPermissionGroupBean data ) {
 
+        System.out.println("===: " + data);
         data.normalize();
         ResultMsg result = new ResultMsg();
         SysPermissionGroup sysPermissionGroup;
-
-        String username = null;
-        long userId = 0L;
+        long userId = sysUserService.getUserIdInToken(authentication);
         long id = data.getId();
 
         sysPermissionGroup = sysPermissionService.selectGroupById(id);
@@ -400,16 +410,6 @@ public class PermissionController {
             result.setCode(300003);
             result.setMsg("权限组不存在");
             return result;
-        }
-
-        if (null != authentication && null != authentication.getPrincipal()) {
-            username = authentication.getPrincipal().toString();
-        }
-        if (null != username && !username.isEmpty()) {
-            SysUser sysUser = sysUserService.selectByLoginName(username);
-            if (null != sysUser) {
-                userId = sysUser.getId();
-            }
         }
 
         sysPermissionGroup.setName(data.getName());
@@ -462,7 +462,7 @@ public class PermissionController {
         if (postData.getData().getSysPermissionGroupId() == null) {
             groupId = null;
         } else {
-            groupId = new Long(postData.getData().getSysPermissionGroupId());
+            groupId = postData.getData().getSysPermissionGroupId();
         }
         PageInfo<SysPermissionBean> pageInfo = sysPermissionService.selectPage(postData.getPageIndex(), postData.getPageSize(), "id", "ASC",
                 postData.getData().getName(), postData.getData().getDescription(),

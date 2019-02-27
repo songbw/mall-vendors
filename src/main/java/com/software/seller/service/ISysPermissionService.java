@@ -26,6 +26,10 @@ public interface ISysPermissionService {
 
     boolean isExistGroupName(String name);
 
+    boolean isExistGroupCode(String code);
+
+    boolean isExistPermissionUseGroupCode(String code);
+
     long insertPermissionGroup(SysPermissionGroup sysPermissionGroup);
 
     List<SysPermissionGroup> selectGroup();

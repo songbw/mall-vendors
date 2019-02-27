@@ -273,23 +273,30 @@
     </select>
     <select id="isExistName" resultType="java.lang.Boolean">
         SELECT exists(
-                SELECT *
+                SELECT id
                 FROM sys_permission
                 WHERE status = 1 AND name = #{name} AND sys_permission_group_id = #{groupId}
         )
     </select>
     <select id="isExistCode" resultType="java.lang.Boolean">
         SELECT exists(
-                SELECT *
+                SELECT id
                 FROM sys_permission
                 WHERE status = 1 AND code = #{code} AND sys_permission_group_id = #{groupId}
         )
     </select>
     <select id="isExistNameExcludeId" resultType="java.lang.Boolean">
         SELECT exists(
-                SELECT *
+                SELECT id
                 FROM sys_permission
                 WHERE status = 1 AND name = #{name} AND sys_permission_group_id = #{groupId} AND id != #{id}
+        )
+    </select>
+    <select id="isExistGroupCode" resultType="java.lang.Boolean">
+        SELECT exists(
+                SELECT id
+                FROM sys_permission
+                WHERE status = 1 AND code LIKE concat(#{code},'%')
         )
     </select>
     <select id="selectCodeByIdList" parameterType="java.util.ArrayList" resultType="java.lang.String">

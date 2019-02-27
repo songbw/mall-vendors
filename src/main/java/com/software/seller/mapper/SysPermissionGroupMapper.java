@@ -30,6 +30,8 @@ public interface SysPermissionGroupMapper {
 
     boolean isExistGroupName(@Param("name") String name);
 
+    boolean isExistGroupCode(@Param("code") String code);
+
     void deleteById(@Param("id") long id);
 
     //删除status==2的记录

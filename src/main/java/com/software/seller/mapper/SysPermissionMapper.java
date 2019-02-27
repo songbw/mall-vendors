@@ -42,6 +42,8 @@ public interface SysPermissionMapper {
 
     boolean isExistCode(@Param("groupId") long groupId, @Param("code") String code);
 
+    boolean isExistGroupCode(@Param("code") String code);
+
     boolean isExistNameExcludeId(@Param("id") long id, @Param("groupId") long groupId, @Param("name") String name);
 
     boolean isExistCodeExcludeId(@Param("id") long id, @Param("groupId") long groupId, @Param("code") String code);

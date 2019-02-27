@@ -305,7 +305,9 @@ public class UserController {
         sysUser.setEnName(enName);
         sysUser.setPhone(phone);
         sysUser.setSex(sex);
-        sysUser.setPassword(PasswordEncodeUtil.passwordEncoder(password));
+        if (null != password && !password.isEmpty()) {
+            sysUser.setPassword(PasswordEncodeUtil.passwordEncoder(password));
+        }
         sysUser.setZhName(zhName);
         sysUser.setStatus(1);
         sysUser.setUpdateBy(userId);
@@ -371,7 +373,7 @@ public class UserController {
             email= postData.getEmail();
             phone = postData.getPhone();
             address = postData.getAddress();
-            System.out.println("=== loginName: " + loginName);
+            System.out.println("=== loginName: " + loginName + " Id: " + currentUserId + " rank: " + rank);
             try {
                 if (null != postData.getCreateTimeStart() && !postData.getCreateTimeStart().isEmpty()) {
                     createTimeStart = StringUtil.String2Date(postData.getCreateTimeStart());

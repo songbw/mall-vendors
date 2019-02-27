@@ -31,6 +31,7 @@ public class SysUserServiceImpl implements ISysUserService {
 
     private SysUserMapper sysUserMapper;
     private SysUserRoleOrganizationMapper sysUserRoleOrganizationMapper;
+    private SysOrganizationMapper sysOrganizationMapper;
     private SysUserPermissionMapper sysUserPermissionMapper;
     private SysPermissionMapper sysPermissionMapper;
     //@Autowired
@@ -39,11 +40,13 @@ public class SysUserServiceImpl implements ISysUserService {
     @Autowired
     public SysUserServiceImpl(SysUserMapper sysUserMapper,
                               SysUserRoleOrganizationMapper sysUserRoleOrganizationMapper,
+                              SysOrganizationMapper sysOrganizationMapper,
                               SysUserPermissionMapper sysUserPermissionMapper,
                               SysPermissionMapper sysPermissionMapper
                               ) {
         this.sysUserMapper = sysUserMapper;
         this.sysUserRoleOrganizationMapper = sysUserRoleOrganizationMapper;
+        this.sysOrganizationMapper = sysOrganizationMapper;
         this.sysUserPermissionMapper = sysUserPermissionMapper;
         this.sysPermissionMapper = sysPermissionMapper;
         //this.sysLoginStatusMapper = sysLoginStatusMapper;
@@ -184,7 +187,11 @@ public class SysUserServiceImpl implements ISysUserService {
     public long selectOrganizationRank(long userId) {
         SysUserRoleOrganization userRoleOrganization = sysUserRoleOrganizationMapper.selectByUserId(userId);
         if (null != userRoleOrganization) {
-            return userRoleOrganization.getRank();
+            long orgId = userRoleOrganization.getSysRoleOrganizationId();
+            SysOrganization org = sysOrganizationMapper.selectById(orgId);
+            if (null != org) {
+                return org.getRank();
+            }
         }
         return 9999;
     }

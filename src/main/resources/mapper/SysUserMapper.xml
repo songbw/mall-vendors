@@ -125,7 +125,7 @@
             where sys_role_organization_id IN (
             SELECT id
             FROM sys_organization
-            WHERE rank &lt;= #{rank}
+            WHERE rank &lt;= #{rank} AND status = 1
             )
             )
         </if>
