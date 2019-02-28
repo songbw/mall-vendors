@@ -73,10 +73,10 @@ public class SysLogAOP {
         log.setUserAgent(request.getHeader("user-agent"));
         systemService.insertSysControllerLog(log);
 
-        logger.info("request contentType:{}", request.getHeader("Accept"));
-        logger.info("request param : {}", log.getParam());
-        logger.info("reuest method : {}", request.getMethod());
-        logger.info("request url : {}", log.getUrl());
+        //logger.info("request contentType:{}", request.getHeader("Accept"));
+        //logger.info("request param : {}", log.getParam());
+        //logger.info("reuest method : {}", request.getMethod());
+        //logger.info("request url : {}", log.getUrl());
         return httpData;
     }
 

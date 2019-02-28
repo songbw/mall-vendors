@@ -55,7 +55,7 @@ public class LoginController {
     @PostMapping("/userLogout")
     public ResultMsg userLogout(@ApiParam(value="body: 用户名",required=true)@RequestBody LoginBean username)
     {
-        System.out.println("logout");
+        //System.out.println("logout");
         ResultMsg result = new ResultMsg();
         if (null == username || null == username.getUsername()) {
             result.setCode(100000);
@@ -71,7 +71,7 @@ public class LoginController {
         }
 
         StringUtil.deleteToken(name);
-        System.out.println("removed the key: "+name);
+        //System.out.println("removed the key: "+name);
         result.setCode(200);
         return result;
     }
@@ -79,7 +79,7 @@ public class LoginController {
     @ApiOperation(value = "获取验证码", notes="验证码在返回JSON中的msg部分")
     @GetMapping("/getCode")
     public ResultMsg getVerificationCode(@ApiParam(value="用户名",required=true)@RequestParam String username) {
-        System.out.println("getCode for "+username);
+        //System.out.println("getCode for "+username);
         ResultMsg result = new ResultMsg();
         if(null == username || username.isEmpty()){
             result.setCode(100000);
@@ -190,7 +190,7 @@ public class LoginController {
 
         String value = StringUtil.getVerificationCode(username);
         if(null == value || !value.equals(code)){
-            System.out.println("storedCode= "+ value);
+            //System.out.println("storedCode= "+ value);
             result.setCode(100004);
             result.setMsg("验证码不正确");
             return result;

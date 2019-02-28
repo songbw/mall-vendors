@@ -101,7 +101,7 @@ public class StringUtil {
         }
 
         name = name.trim();
-        Pattern pattern = Pattern.compile("^[a-zA-Z0-9]{1}([a-zA-Z0-9]|[._]){5,19}$");
+        Pattern pattern = Pattern.compile("^[a-zA-Z0-9]{1}([a-zA-Z0-9]|[._]){3,19}$");
         Matcher matcher = pattern.matcher(name);
         if (!matcher.matches()) {
             return false;
@@ -115,28 +115,27 @@ public class StringUtil {
         }
 
         password = password.trim();
-
-        Pattern pattern = Pattern.compile("^([A-Z]|[a-z]|[0-9]|[`~!@#$%^&*()+=|{}':;',\\\\\\\\[\\\\\\\\].<>/?~！@#￥%……&*（）——+|{}【】‘；：”“'。，、？]){6,20}$");
+        //System.out.println("=== password: " + password);
+        Pattern pattern = Pattern.compile("^([a-zA-z0-9])([A-Z]|[a-z]|[0-9]|[`~!@#$%^&*()+=|{}':;',\\\\\\\\[\\\\\\\\].<>/?~！@#￥%……&*（）——+|{}【】‘；：”“'。，、？]){3,20}$");
         Matcher matcher = pattern.matcher(password);
         if (!matcher.matches()) {
+            //System.out.println("=== password: Not match 1" );
             return false;
         }
 
-        Pattern strongPattern = Pattern.compile("^(?![a-zA-z]+$)(?!\\d+$)(?![!@#$%^&*]+$)(?![a-zA-z\\d]+$)(?![a-zA-z!@#$%^&*]+$)(?![\\d!@#$%^&*]+$)[a-zA-Z\\d!@#$%^&*]+$");
+        Pattern strongPattern = Pattern.compile("^[a-zA-z0-9](?![a-zA-z0-9]+$)(?!\\d+$)(?![!@#$%^&*]+$)(?![a-zA-z\\d]+$)(?![a-zA-z!@#$%^&*]+$)(?![\\d!@#$%^&*]+$)[a-zA-Z\\d!@#$%^&*]+$");
         Matcher strongMatcher = strongPattern.matcher(password);
         if (strongMatcher.matches()) {
             System.out.println("Strong password");
         } else {
-            Pattern middlePattern = Pattern.compile("^(?![a-zA-z]+$)(?!\\d+$)(?![!@#$%^&*]+$)[a-zA-Z\\d!@#$%^&*]+$");
+            Pattern middlePattern = Pattern.compile("^(?![a-zA-z0-9]+$)(?!\\d+$)(?![!@#$%^&*]+$)[a-zA-Z\\d!@#$%^&*]+$");
             Matcher middleMatcher = middlePattern.matcher(password);
             if (middleMatcher.matches()) {
                 System.out.println("middle password");
             } else {
-                return false;
+                System.out.println("weak password" );
             }
         }
-
-
 
         return true;
     }
@@ -154,13 +153,13 @@ public class StringUtil {
         if (stringDate.isEmpty()) {
             return null;
         }
-        System.out.println("==String2Date: " + stringDate);
+        //System.out.println("==String2Date: " + stringDate);
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         Date returnDate = new Date(1L);
         try {
             Date tmpDate = sdf.parse(stringDate);
             returnDate = tmpDate;
-            System.out.println("== tmpDate: " + tmpDate + " resultDate: " + returnDate);
+            //System.out.println("== tmpDate: " + tmpDate + " resultDate: " + returnDate);
         } catch (ParseException ex) {
             System.out.println(ex.getMessage());
             returnDate = new Date();

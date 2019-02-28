@@ -15,8 +15,7 @@ public class CustomLogoutSuccessHandler implements LogoutSuccessHandler{
     @Override
     public void onLogoutSuccess(HttpServletRequest var1, HttpServletResponse var2, Authentication var3)
             throws IOException {
-        System.out.println("success logout");
-
+        //System.out.println("success logout");
 
         if (null == var3|| null == var3.getPrincipal()) {
             var2.getWriter().println(JSONResult.fillResultString(10004,"invalid Token", ""));

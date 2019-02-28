@@ -69,7 +69,7 @@ public class systemController {
             System.out.println("!! can not find post data");
             return new ResultObject<>(30000,"missing data",null);
         }
-        System.out.println("search Log: time_start: " + createTimeStart + "   time_end:  " + createTimeEnd);
+        //System.out.println("search Log: time_start: " + createTimeStart + "   time_end:  " + createTimeEnd);
         try {
             if (null != postData.getData().getCreateTimeStart() && !postData.getData().getCreateTimeStart().isEmpty()) {
                 createTimeStart = StringUtil.String2Date(postData.getData().getCreateTimeStart());
@@ -82,7 +82,7 @@ public class systemController {
             return new ResultObject<>(30000,"missing data",null);
         }
 
-        System.out.println("search Log: time_start: " + createTimeStart + "   time_end:  " + createTimeEnd);
+        //System.out.println("search Log: time_start: " + createTimeStart + "   time_end:  " + createTimeEnd);
         PageInfo<SysLogBean> pageInfo = systemService.selectLog(pageIndex, pageSize,
                 "id", "DESC", method, url, param, createTimeStart, createTimeEnd, user);
 

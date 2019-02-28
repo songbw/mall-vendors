@@ -48,13 +48,13 @@ public class JWTAuthenticationFilter extends BasicAuthenticationFilter {
         try {
             authentication = TokenAuthenticationService.getAuthentication(request, response);
         } catch (JwtException ex) {
-            System.out.println("doFilterInternal: token Exp");
+            //System.out.println("doFilterInternal: token Exp");
             response.getWriter().println(JSONResult.fillResultString(5000, "failed", ex.getMessage()));
             return;
         }
 
         if (null == authentication) {
-            System.out.println("doFilterInternal: no token");
+            //System.out.println("doFilterInternal: no token");
             chain.doFilter(request, response);
             return;
         }

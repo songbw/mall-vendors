@@ -364,31 +364,31 @@
     <select id="selectCounts" resultType="integer">
         SELECT count(*)
         FROM sys_user
-        WHERE status != 2
+        WHERE status = 1
     </select>
     <select id="isExistLoginNameByName" resultType="boolean">
         SELECT exists(
-                SELECT *
+                SELECT id
                 FROM sys_user
-                WHERE status != 2 AND login_name = #{loginName}
+                WHERE status = 1 AND login_name = #{loginName}
         )
     </select>
     <select id="isExistLoginNameExcludeId" resultType="java.lang.Boolean">
         SELECT exists(
-                SELECT *
+                SELECT id
                 FROM sys_user
-                WHERE status != 2 AND id != #{id} AND login_name = #{loginName}
+                WHERE status = 1 AND id != #{id} AND login_name = #{loginName}
         )
     </select>
     <select id="selectUserByLoginName" resultMap="BaseResultMap" parameterType="java.lang.String">
         SELECT *
         FROM sys_user
-        WHERE status != 2 AND login_name = #{loginName}
+        WHERE status = 1 AND login_name = #{loginName}
     </select>
     <select id="selectInfoByLoginName" resultMap="BaseResultMap" parameterType="java.lang.String">
         SELECT login_name, password, status
         FROM sys_user
-        WHERE status != 2 AND login_name = #{loginName}
+        WHERE status = 1 AND login_name = #{loginName}
     </select>
     <delete id="shrink">
         DELETE

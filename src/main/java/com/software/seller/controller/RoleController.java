@@ -124,7 +124,7 @@ public class RoleController {
 
         result.setCode(200);
         result.setMsg("id: " + id);
-        System.out.println("organization insert success");
+        //System.out.println("organization insert success");
         return result;
     }
 
@@ -209,7 +209,7 @@ public class RoleController {
         sysOrganizationService.updateOrganization(sysOrganization, data.getRoleIds());
         result.setCode(200);
         result.setMsg("success");
-        System.out.println("update success");
+        //System.out.println("update success");
         return result;
     }
 
@@ -271,7 +271,7 @@ public class RoleController {
 
         String username = JwtTokenUtil.getUsername(authentication);
         if (null != username && !username.isEmpty()) {
-            System.out.println("=== get username: " + username);
+            //System.out.println("=== get username: " + username);
             sysUser = sysUserService.selectByLoginName(username);
         }
 
@@ -413,7 +413,7 @@ public class RoleController {
         sysRoleService.insertRole(sysRole, data.getPermissionGroups());
         result.setCode(200);
         result.setMsg("success");
-        System.out.println("organization insert success");
+        //System.out.println("organization insert success");
         return result;
     }
 
@@ -482,7 +482,7 @@ public class RoleController {
         sysRoleService.updateRole(sysRole, data.getPermissionGroups());
         result.setCode(200);
         result.setMsg("success");
-        System.out.println("update success");
+        //System.out.println("update success");
         return result;
     }
 
@@ -524,7 +524,7 @@ public class RoleController {
 
         long userId = sysUserService.getUserIdInToken(authentication);
         List<Long> orgIds = sysOrganizationService.selectChildrenListByUserId(userId);
-        System.out.println("== get org list: " + orgIds);
+        //System.out.println("== get org list: " + orgIds);
         List<SysRoleBean> roles = sysRoleService.selectByOrgIds(orgIds);
 
         return new ResultObject<>(200,"success", roles);

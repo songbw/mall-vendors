@@ -70,13 +70,13 @@ public class UserController {
 
         if (!StringUtil.isRightName(name)) {
             result.setCode(100000);
-            result.setMsg("用户名只能输入6-20个以字母开头、可带数字、“_”、“.”的字串");
+            result.setMsg("用户名只能输入4-20个以字母开头、可带数字、“_”、“.”的字串");
             return result;
         }
 
         if (!StringUtil.isRightPassword(password)) {
             result.setCode(100010);
-            result.setMsg("密码只能输入6-20个以字母开头、可带数字、“_”、“.”的字串");
+            result.setMsg("密码只能输入4-20个以字母开头、可带数字、“_”、“.”的字串");
             return result;
         }
 
@@ -113,7 +113,7 @@ public class UserController {
 
         result.setCode(200);
         result.setMsg("id:"+id);
-        System.out.println("注册成功");
+        //System.out.println("注册成功");
         return result;
     }
 
@@ -146,13 +146,13 @@ public class UserController {
 
         if (!StringUtil.isRightName(name)) {
             result.setCode(100000);
-            result.setMsg("用户名只能输入6-20个以字母开头、可带数字、“_”、“.”的字串");
+            result.setMsg("用户名只能输入4-20个以字母数字开头、可带数字、“_”、“.”的字串");
             return result;
         }
 
         if (!StringUtil.isRightPassword(password)) {
             result.setCode(100010);
-            result.setMsg("密码只能输入6-20个以字母开头、可带数字、“_”、“.”的字串");
+            result.setMsg("密码只能输入4-20个字母数字开头、可带数字、“_”、“.”的字串");
             return result;
         }
 
@@ -183,7 +183,7 @@ public class UserController {
         result.setCode(200);
         result.setMsg("id:"+id);
 
-        System.out.println("Insert success");
+        //System.out.println("Insert success");
         return result;
     }
 
@@ -253,7 +253,7 @@ public class UserController {
 
         sysUserService.deleteById(sysUser.getId());
         result.setCode(200);
-        System.out.println("删除成功");
+        //System.out.println("删除成功");
         return result;
     }
 
@@ -306,6 +306,11 @@ public class UserController {
         sysUser.setPhone(phone);
         sysUser.setSex(sex);
         if (null != password && !password.isEmpty()) {
+            if (!StringUtil.isRightPassword(password)) {
+                result.setCode(100010);
+                result.setMsg("密码只能输入4-20个字母数字开头、可带数字、“_”、“.”的字串");
+                return result;
+            }
             sysUser.setPassword(PasswordEncodeUtil.passwordEncoder(password));
         }
         sysUser.setZhName(zhName);
@@ -318,7 +323,7 @@ public class UserController {
         sysUserService.updateUser(sysUser,permissions,userRoleOrganization);
 
         result.setCode(200);
-        System.out.println("更新成功");
+        //System.out.println("更新成功");
         return result;
     }
 
@@ -340,7 +345,7 @@ public class UserController {
         sysUserService.updateUserPermission(userId,permissionIds);
 
         result.setCode(200);
-        System.out.println("更新成功");
+        //System.out.println("更新成功");
         return result;
     }
 
@@ -373,7 +378,7 @@ public class UserController {
             email= postData.getEmail();
             phone = postData.getPhone();
             address = postData.getAddress();
-            System.out.println("=== loginName: " + loginName + " Id: " + currentUserId + " rank: " + rank);
+            //System.out.println("=== loginName: " + loginName + " Id: " + currentUserId + " rank: " + rank);
             try {
                 if (null != postData.getCreateTimeStart() && !postData.getCreateTimeStart().isEmpty()) {
                     createTimeStart = StringUtil.String2Date(postData.getCreateTimeStart());
@@ -403,11 +408,11 @@ public class UserController {
             System.out.println("!! can not find post data");
         }
 
-        System.out.println(" loginName = [" + loginName + "], zhName = [" + zhName + "], email = [" + email + "], phone = [" + phone + "]," +
+        /*System.out.println(" loginName = [" + loginName + "], zhName = [" + zhName + "], email = [" + email + "], phone = [" + phone + "]," +
                 " address = [" + address + "]" + " createTimeStart = " + createTimeStart + "]" +
                 " createTimeEnd = " + createTimeEnd + "]" +
                 " updateTimeStart = " + updateTimeStart + "]" +
-                " updateTimeEnd = " + updateTimeEnd + "]" );
+                " updateTimeEnd = " + updateTimeEnd + "]" );*/
 
         PageInfo<SysUserBean> pageInfo = sysUserService.selectPage(index, size,
                 "id", "ASC", loginName, zhName, email, phone, address, createTimeStart, createTimeEnd, updateTimeStart, updateTimeEnd, rank);

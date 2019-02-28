@@ -97,7 +97,7 @@ public class SysRoleServiceImpl implements ISysRoleService {
         if (permissionIds.size() == 0) {
             return;
         }
-        System.out.println("===updateRole: permission: " + permissionIds);
+        //System.out.println("===updateRole: permission: " + permissionIds);
         List<Long> permissionIdNew = getPermissionNeedAdd(sysRole, permissionIds);
 
         InsertRolePermission(sysRole, permissionIdNew);

@@ -102,7 +102,7 @@ public class JWTLoginFilter extends AbstractAuthenticationProcessingFilter {
                                             HttpServletResponse response,
                                             FilterChain chain, Authentication authResult)
             throws IOException {
-        System.out.println("successfulAuthentication");
+        //System.out.println("successfulAuthentication");
         TokenAuthenticationService.addAuthenticatiotoHttpHeader(response,authResult);
 
         //String username = authResult.getPrincipal().toString();

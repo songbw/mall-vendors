@@ -95,7 +95,7 @@ public class PermissionController {
         long id = sysPermissionService.insertPermission(sysPermission);
         result.setCode(200);
         result.setMsg("id:"+id);
-        System.out.println("permission insert success");
+        //System.out.println("permission insert success");
         return result;
     }
 
@@ -176,7 +176,7 @@ public class PermissionController {
         sysPermissionService.update(sysPermission);
         result.setCode(200);
         result.setMsg("success");
-        System.out.println("update success");
+        //System.out.println("update success");
         return result;
     }
 
@@ -311,7 +311,7 @@ public class PermissionController {
         List<SysPermission> p = sysPermissionService.selectByGroupId(groupId);
         try {
             if (0 < p.size() || sysPermissionService.isExistPermissionUseGroupCode(groupCode)) {
-                System.out.println("==: " + p);
+                //System.out.println("==: " + p);
                 result.setCode(300000);
                 result.setMsg("there is permission belong to this group!");
                 return result;
@@ -384,7 +384,7 @@ public class PermissionController {
         long id = sysPermissionService.insertPermissionGroup(sysPermissionGroup);
         result.setCode(200);
         result.setMsg("id:"+id);
-        System.out.println("permission insert success");
+        //System.out.println("permission insert success");
         return result;
     }
 
@@ -398,7 +398,7 @@ public class PermissionController {
                             @ApiParam(value="data: ID必须填写,其他的可以空缺",required=true)
                             @RequestBody SysPermissionGroupBean data ) {
 
-        System.out.println("===: " + data);
+        //System.out.println("===: " + data);
         data.normalize();
         ResultMsg result = new ResultMsg();
         SysPermissionGroup sysPermissionGroup;
@@ -424,7 +424,7 @@ public class PermissionController {
         sysPermissionService.updateGroupById(sysPermissionGroup);
         result.setCode(200);
         result.setMsg("success");
-        System.out.println("update success");
+        //System.out.println("update success");
         return result;
     }
 

@@ -53,12 +53,12 @@ public class RedisUtil {
         JedisPool pool = null;
         Jedis jedis = null;
 		try {
-			logger.info("redisIp:"+redisIp+" key="+key+", value="+token);
+			//logger.info("redisIp:"+redisIp+" key="+key+", value="+token);
 			pool =getJedisPool();
 			jedis = pool.getResource();
 			jedis.setex(key, expire, token);
 			Long ttl = jedis.ttl(key);
-			logger.info("token缓存成功！剩余时间="+ttl+"秒");
+			//logger.info("token缓存成功！剩余时间="+ttl+"秒");
 		} catch (Exception e) {
 			pool.returnBrokenResource(jedis);
 			throw e;
