@@ -317,7 +317,7 @@
                 ) OR id in (
                 SELECT a.sys_permission_id
                 FROM sys_role_permission a LEFT JOIN sys_role_organization b ON a.sys_role_id=b.sys_role_id
-                WHERE b.sys_organization_id in (
+                WHERE a.status = 1 AND b.status = 1 AND b.sys_organization_id in (
                       select sys_role_organization_id
                       from sys_user_role_organization
                       WHERE status = 1 AND sys_user_id = #{userId}
@@ -338,7 +338,7 @@
                 ) OR id in (
                 SELECT a.sys_permission_id
                 FROM sys_role_permission a LEFT JOIN sys_role_organization b ON a.sys_role_id=b.sys_role_id
-                WHERE b.sys_organization_id in (
+                WHERE a.status = 1 AND b.status = 1 AND b.sys_organization_id in (
                       select sys_role_organization_id
                       from sys_user_role_organization
                       WHERE status = 1 AND sys_user_id = #{userId}

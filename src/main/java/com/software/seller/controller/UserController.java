@@ -192,7 +192,7 @@ public class UserController {
             @ApiImplicitParam(name="Token",value="登录成功时从服务获得的Token",required=true, paramType="Header",dataType="String")
     })
     @GetMapping("/info")
-    @PreAuthorize("hasPermission('user','list')")
+    //@PreAuthorize("hasPermission('user','list')")
     public ResultObject<SysUserBean> getUserInfo(@ApiParam(value="用户名",required=true)@RequestParam String username) {
 
         ResultObject<SysUserBean> result = new ResultObject<>(200,"success",null);
