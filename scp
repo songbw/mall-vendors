@@ -1,1 +1,1 @@
-scp -P2236 target\seller-0.0.1-SNAPSHOT.jar smartadmin@42.121.121.128:~
+scp -P22110 target\seller-0.0.1-SNAPSHOT.jar smartadmin@115.159.100.38:/tmp
