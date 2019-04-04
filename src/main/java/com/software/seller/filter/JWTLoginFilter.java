@@ -108,6 +108,7 @@ public class JWTLoginFilter extends AbstractAuthenticationProcessingFilter {
         //String username = authResult.getPrincipal().toString();
 
         //StringUtil.setToken(username, authResult.toString());
+        response.setContentType("application/json;charset=UTF-8");
         response.getWriter().println(JSONResult.fillResultString(200,"success", "in Header, Authorization Bearer Token"));
     }
 
